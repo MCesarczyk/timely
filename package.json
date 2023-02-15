@@ -15,6 +15,7 @@
     "@nrwl/cypress": "15.7.1",
     "@nrwl/eslint-plugin-nx": "15.7.1",
     "@nrwl/linter": "15.7.1",
+    "@nrwl/nest": "^15.7.1",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "15.7.1",
     "@nrwl/vite": "15.7.1",
