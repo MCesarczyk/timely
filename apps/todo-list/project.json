@@ -24,7 +24,8 @@
       "executor": "@nrwl/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "todo-list:build"
+        "buildTarget": "todo-list:build",
+        "port": 3000
       },
       "configurations": {
         "development": {

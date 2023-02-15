@@ -24,7 +24,8 @@
       "executor": "@nrwl/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "timer:build"
+        "buildTarget": "timer:build",
+        "port": 3100
       },
       "configurations": {
         "development": {
