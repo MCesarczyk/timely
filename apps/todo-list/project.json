@@ -25,7 +25,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "todo-list:build",
-        "port": 3000
+        "port": 3000,
+        "open": true
       },
       "configurations": {
         "development": {

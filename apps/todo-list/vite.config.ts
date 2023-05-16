@@ -2,9 +2,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
+import svgr from 'vite-plugin-svgr';
+import path from 'path';
 
 export default defineConfig({
   cacheDir: '../../node_modules/.vite/todo-list',
+
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, '/src'),
+    },
+  },
 
   server: {
     port: 4200,
@@ -16,11 +24,20 @@ export default defineConfig({
     host: 'localhost',
   },
 
+  define: {
+    'process.env': {},
+  },
+
+  build: {
+    outDir: 'build',
+  },
+
   plugins: [
     react(),
     viteTsConfigPaths({
       root: '../../',
     }),
+    svgr({ svgrOptions: { icon: true } })
   ],
 
   // Uncomment this if you are using workers.
