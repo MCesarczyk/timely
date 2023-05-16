@@ -1,6 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
-import { selectTasks, toggleHideDone, setAllDone, selectHideDone, selectIfAllDone } from 'features/tasks/tasksSlice';
+import {
+  selectTasks,
+  toggleHideDone,
+  setAllDone,
+  selectHideDone,
+  selectIfAllDone,
+} from 'app/tasks/tasksSlice';
 
 interface FormButtonsProps {
   setDoneButtonInnerText: string;
@@ -23,7 +29,9 @@ export const FormButtons = ({
       {tasks.length > 0 && (
         <>
           <Button onClick={() => dispatch(toggleHideDone())}>
-            {hideDone ? toggleButtonInnerTextHidden : toggleButtonInnerTextVisible}
+            {hideDone
+              ? toggleButtonInnerTextHidden
+              : toggleButtonInnerTextVisible}
           </Button>
           <Button onClick={() => dispatch(setAllDone())} disabled={allDone}>
             {setDoneButtonInnerText}

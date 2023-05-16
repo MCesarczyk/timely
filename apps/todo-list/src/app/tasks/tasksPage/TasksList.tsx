@@ -2,14 +2,23 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { css, styled } from 'styled-components';
 import { RootState } from 'store';
-import { selectTasksByQuery, toggleTaskDone, removeTask, selectHideDone } from 'features/tasks/tasksSlice';
+import {
+  selectTasksByQuery,
+  toggleTaskDone,
+  removeTask,
+  selectHideDone,
+} from 'app/tasks/tasksSlice';
 import { SEARCH_QUERY_PARAM_NAME } from './constants';
 
 export const TasksList = () => {
   const location = useLocation();
-  const query: string | null = new URLSearchParams(location.search).get(SEARCH_QUERY_PARAM_NAME);
+  const query: string | null = new URLSearchParams(location.search).get(
+    SEARCH_QUERY_PARAM_NAME
+  );
 
-  const tasks = useSelector((state: RootState) => selectTasksByQuery(state, query));
+  const tasks = useSelector((state: RootState) =>
+    selectTasksByQuery(state, query)
+  );
   const hideDone = useSelector(selectHideDone);
   const dispatch = useDispatch();
 

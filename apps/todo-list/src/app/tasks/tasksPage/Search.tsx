@@ -1,10 +1,13 @@
 import { ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
+import {
+  useQueryParameter,
+  useReplaceQueryParameter,
+} from 'app/tasks/tasksPage/queryParameters';
+import { Input } from 'app/tasks/tasksPage/Input';
 import { selectLanguage } from 'common/languages/languageSlice';
 import { descriptions } from 'common/languages/descriptions';
-import { useQueryParameter, useReplaceQueryParameter } from 'features/tasks/tasksPage/queryParameters';
-import { Input } from 'features/tasks/tasksPage/Input';
 import { SEARCH_QUERY_PARAM_NAME } from './constants';
 
 export const Search = () => {
@@ -21,7 +24,11 @@ export const Search = () => {
 
   return (
     <Wrapper>
-      <Input placeholder={descriptions[language].searchLabelPlaceholder} value={query || ''} onChange={onInputChange} />
+      <Input
+        placeholder={descriptions[language].searchLabelPlaceholder}
+        value={query || ''}
+        onChange={onInputChange}
+      />
     </Wrapper>
   );
 };

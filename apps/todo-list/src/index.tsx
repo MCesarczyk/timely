@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 
-import { App } from 'App';
+import { App } from 'app/App';
 import { store } from 'store';
 import { theme } from 'theme';
 import { GlobalStyle } from 'GlobalStyle';

@@ -3,7 +3,7 @@ import { descriptions } from 'common/languages/descriptions';
 import { selectLanguage } from 'common/languages/languageSlice';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
-import { fetchExampleTasks, selectState } from 'features/tasks/tasksSlice';
+import { fetchExampleTasks, selectState } from 'app/tasks/tasksSlice';
 import { Form } from './Form';
 import { Search } from './Search';
 import { TasksList } from './TasksList';
@@ -30,7 +30,10 @@ export const TasksPage = () => {
         extraHeaderContent={
           <>
             <div>
-              <Button disabled={state === 'loading'} onClick={() => dispatch(fetchExampleTasks())}>
+              <Button
+                disabled={state === 'loading'}
+                onClick={() => dispatch(fetchExampleTasks())}
+              >
                 {state === 'loading'
                   ? descriptions[language].getExampleTasksButtonLoader
                   : descriptions[language].getExampleTasksButtonText}
@@ -39,15 +42,25 @@ export const TasksPage = () => {
           </>
         }
       />
-      <Section title={descriptions[language].searchSectionTitle} body={<Search />} extraHeaderContent={<></>} />
+      <Section
+        title={descriptions[language].searchSectionTitle}
+        body={<Search />}
+        extraHeaderContent={<></>}
+      />
       <Section
         title={descriptions[language].tasksSectionTitle}
         body={<TasksList />}
         extraHeaderContent={
           <FormButtons
-            setDoneButtonInnerText={descriptions[language].setDoneButtonInnerText}
-            toggleButtonInnerTextVisible={descriptions[language].toggleButtonInnerTextVisible}
-            toggleButtonInnerTextHidden={descriptions[language].toggleButtonInnerTextHidden}
+            setDoneButtonInnerText={
+              descriptions[language].setDoneButtonInnerText
+            }
+            toggleButtonInnerTextVisible={
+              descriptions[language].toggleButtonInnerTextVisible
+            }
+            toggleButtonInnerTextHidden={
+              descriptions[language].toggleButtonInnerTextHidden
+            }
           />
         }
       />

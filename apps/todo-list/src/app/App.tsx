@@ -2,9 +2,9 @@ import { Route, HashRouter, Routes, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectLanguage } from 'common/languages/languageSlice';
 import { descriptions } from 'common/languages/descriptions';
-import { TasksPage } from 'features/tasks/tasksPage/TasksPage';
-import { TaskPage } from 'features/tasks/TaskPage';
-import { AuthorPage } from 'features/author/AuthorPage';
+import { TasksPage } from 'app/tasks/tasksPage/TasksPage';
+import { TaskPage } from 'app/tasks/TaskPage';
+import { AuthorPage } from 'app/author/AuthorPage';
 import { Nav } from 'common/nav/Nav';
 
 export const App = () => {
