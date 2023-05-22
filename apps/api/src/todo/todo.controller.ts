@@ -1,39 +1,44 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { todos } from './todos-mock';
-import { TodoDTO } from './todo.dto';
-
-let todosData = todos;
+import { TodoService } from './todo.service';
+import { Todo } from '@prisma/client';
 
 @Controller('todos')
 export class TodoController {
+  constructor(private readonly todoService: TodoService) { }
+
   @Get()
-  getTodos(): TodoDTO[] {
-    return todosData;
+  getTodos(): Promise<Todo[]> {
+    return this.todoService.getTodos();
+  }
+
+  @Get(':id')
+  getTodoById(@Param('id') id: string): Promise<Todo> {
+    return this.todoService.getTodoById(id);
   }
 
   @Post()
-  createTodo(@Body() createTodo: TodoDTO): TodoDTO {
-    const newTodo: TodoDTO = {
-      id: (todosData.length + 1).toString(),
-      ...createTodo
-    };
-
-    todosData = [...todosData, newTodo];
-
-    return newTodo;
+  createTodo(@Body() newTodo: Todo): Promise<Todo> {
+    return this.todoService.createTodo({
+      content: newTodo.content,
+      done: newTodo.done
+    });
   }
 
   @Put(':id')
-  updateTodo(@Body() updateTodo: TodoDTO, @Param('id') id): TodoDTO {
-    todosData = todosData.map(todo => (todo.id === id ? updateTodo : todo));
-    return updateTodo;
+  updateTodo(@Body() updateTodo: Todo, @Param('id') id): Promise<Todo> {
+    return this.todoService.updateTodo({
+      where: { id: Number(id) },
+      data: {
+        content: updateTodo.content,
+        done: updateTodo.done
+      }
+    });
   }
 
   @Delete(':id')
-  deleteTodo(@Param('id') id): TodoDTO {
-    const todoToDelete = todosData.find(todo => todo.id === id);
-    todosData = todosData.filter(todo => todo.id !== id);
-
-    return todoToDelete;
+  deleteTodo(@Param('id') id): Promise<Todo> {
+    return this.todoService.deleteTodo({
+      id: Number(id)
+    });
   }
 }
