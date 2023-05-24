@@ -18,7 +18,8 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "axios": "^1.0.0",
+    "axios": "^1.4.0",
+    "commitizen": "^4.3.0",
     "gh-pages": "^5.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -63,6 +64,7 @@
     "babel-jest": "28.1.1",
     "babel-plugin-styled-components": "1.10.7",
     "cypress": "^12.2.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
@@ -89,5 +91,10 @@
     "vite-plugin-svgr": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.31.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
