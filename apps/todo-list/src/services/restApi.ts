@@ -1,12 +1,18 @@
 import axios from "axios";
-import { Task } from "~/types";
-import { API_URLS } from "./apiUrls";
+import { Task } from "types";
+import { API_URLS } from "services/apiUrls";
 
 export const restApi = {
   getTasks: async () => {
     const response = await axios.get(API_URLS.getTasks);
     const tasks = await response.data;
     return tasks;
+  },
+
+  getTask: async (id: string) => {
+    const response = await axios.get(API_URLS.getTask.replace(':todoId', id));
+    const task = await response.data;
+    return task;
   },
 
   createTask: async (task: Task) => {
