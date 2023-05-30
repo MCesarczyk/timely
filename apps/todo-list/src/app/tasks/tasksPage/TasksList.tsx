@@ -26,6 +26,10 @@ export const TasksList = () => {
     });
   };
 
+  const { deleteTask } = tasksApiService.deleteTask();
+
+  const removeTask = (id: string) => deleteTask(id);
+
   return (
     <StyledTaskList>
       {tasks.map((task) => (
@@ -36,7 +40,7 @@ export const TasksList = () => {
           <TaskContent $done={task.done}>
             <StyledLink to={`/tasks/${task.id}`}>{task.content}</StyledLink>
           </TaskContent>
-          <Button $remove onClick={() => dispatch(removeTask(task.id))}>
+          <Button $remove onClick={() => removeTask(task.id)}>
             🗑
           </Button>
         </ListItem>
