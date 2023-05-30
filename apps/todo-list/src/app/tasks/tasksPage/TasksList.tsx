@@ -1,11 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { css, styled } from 'styled-components';
-import {
-  toggleTaskDone,
-  removeTask,
-  selectHideDone,
-} from 'app/tasks/tasksSlice';
+import { removeTask, selectHideDone } from 'app/tasks/tasksSlice';
 import { SEARCH_QUERY_PARAM_NAME } from './constants';
 import { tasksApiService } from '../tasksApiService';
 
@@ -20,11 +16,21 @@ export const TasksList = () => {
   const hideDone = useSelector(selectHideDone);
   const dispatch = useDispatch();
 
+  const { updateTask } = tasksApiService.updateTask();
+
+  const toggleTaskDone = (id: string) => {
+    updateTask({
+      id,
+      done: !tasks.find((task) => task.id === id)?.done,
+      content: tasks.find((task) => task.id === id)?.content || '',
+    });
+  };
+
   return (
     <StyledTaskList>
       {tasks.map((task) => (
         <ListItem key={task.id} hidden={task.done && hideDone}>
-          <Button $toggleDone onClick={() => dispatch(toggleTaskDone(task.id))}>
+          <Button $toggleDone onClick={() => toggleTaskDone(task.id)}>
             {task.done ? '✔' : ' '}
           </Button>
           <TaskContent $done={task.done}>
