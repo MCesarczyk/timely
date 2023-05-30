@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTasksFromLocalStorage } from './tasksLocalStorage';
 import { RootState } from 'store';
 import { Task } from 'types';
 
@@ -10,7 +9,7 @@ interface TasksState {
 }
 
 const initialState: TasksState = {
-  tasks: getTasksFromLocalStorage(),
+  tasks: [],
   hideDone: false,
   state: 'none',
 };
@@ -38,7 +37,6 @@ const tasksSlice = createSlice({
         tasks[index].done = true;
       });
     },
-    fetchExampleTasks: () => {},
     setTasks: (state, { payload: tasks }) => {
       state.tasks = tasks;
     },
@@ -54,7 +52,6 @@ export const {
   toggleTaskDone,
   removeTask,
   setAllDone,
-  fetchExampleTasks,
   setTasks,
   setTasksState,
 } = tasksSlice.actions;
