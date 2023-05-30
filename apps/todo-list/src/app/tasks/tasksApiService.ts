@@ -1,11 +1,11 @@
 import { useQuery } from "react-query";
 import { restApi } from "services/restApi";
-import { isTaskListValid } from "./typeguards";
+import { isTaskListValid, isTaskValid } from "./typeguards";
 
 export const tasksApiService = {
   getTasks: () => {
     const { data, isLoading, error } = useQuery(['tasks'], () => restApi.getTasks());
-    
+
     const taskList = isTaskListValid(data) ? data : [];
 
     return {
@@ -18,8 +18,15 @@ export const tasksApiService = {
   getTask: (id: string) => {
     const { data, isLoading, error } = useQuery(['task', { id }], () => restApi.getTask(id));
 
+    const task = isTaskValid(data) ? data : null;
+
+    console.log('task', task);
+    console.log(data);
+    
+    
+
     return {
-      data,
+      task,
       isLoading,
       error,
     };
