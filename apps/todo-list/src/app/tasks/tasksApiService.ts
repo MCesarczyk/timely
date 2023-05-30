@@ -20,11 +20,6 @@ export const tasksApiService = {
 
     const task = isTaskValid(data) ? data : null;
 
-    console.log('task', task);
-    console.log(data);
-    
-    
-
     return {
       task,
       isLoading,
