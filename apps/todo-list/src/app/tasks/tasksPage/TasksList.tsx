@@ -1,14 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { css, styled } from 'styled-components';
-import { RootState } from 'store';
 import {
-  selectTasksByQuery,
   toggleTaskDone,
   removeTask,
   selectHideDone,
 } from 'app/tasks/tasksSlice';
 import { SEARCH_QUERY_PARAM_NAME } from './constants';
+import { tasksApiService } from '../tasksApiService';
 
 export const TasksList = () => {
   const location = useLocation();
@@ -16,9 +15,8 @@ export const TasksList = () => {
     SEARCH_QUERY_PARAM_NAME
   );
 
-  const tasks = useSelector((state: RootState) =>
-    selectTasksByQuery(state, query)
-  );
+  const { taskList: tasks } = tasksApiService.getTasks();
+
   const hideDone = useSelector(selectHideDone);
   const dispatch = useDispatch();
 

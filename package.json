@@ -1,7 +1,7 @@
 {
   "name": "timely",
   "version": "0.0.0",
-  "proxy": "http://localhost:3333",
+  "proxy": "http://localhost:4000",
   "license": "MIT",
   "scripts": {
     "seed": "prisma db seed"

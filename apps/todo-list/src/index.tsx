@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
@@ -26,6 +27,7 @@ const root = createRoot(container!);
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Normalize />
