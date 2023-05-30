@@ -1,10 +1,9 @@
 import { FormEvent, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
-import { nanoid } from '@reduxjs/toolkit';
-import { addTask } from 'app/tasks/tasksSlice';
+
 import { Input } from 'app/tasks/tasksPage/Input';
 import { Button } from 'app/tasks/tasksPage/Button';
+import { tasksApiService } from '../tasksApiService';
 
 interface FormProps {
   inputPlaceholder: string;
@@ -15,7 +14,7 @@ export const Form = ({ inputPlaceholder, formButtonInnerText }: FormProps) => {
   const [newTaskContent, setNewTaskContent] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const dispatch = useDispatch();
+  const { createTask } = tasksApiService.createTask();
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,18 +24,16 @@ export const Form = ({ inputPlaceholder, formButtonInnerText }: FormProps) => {
       return;
     }
 
-    dispatch(
-      addTask({
-        content: trimmedContent,
-        done: false,
-        id: nanoid(),
-      }),
-    );
-
     setNewTaskContent('');
     if (inputRef.current !== null && 'focus' in inputRef.current) {
       inputRef.current.focus();
     }
+
+    createTask({
+      id: Math.random().toString(),
+      content: trimmedContent,
+      done: false,
+    });
   };
 
   return (

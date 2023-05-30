@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { restApi } from "services/restApi";
 import { isTaskListValid, isTaskValid } from "./typeguards";
 
@@ -24,6 +24,22 @@ export const tasksApiService = {
       task,
       isLoading,
       error,
+    };
+  },
+
+  createTask: () => {
+    const queryClient = useQueryClient();
+
+    const { mutate: createTask, isLoading, isSuccess } = useMutation(restApi.createTask, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['tasks']);
+      },
+    });
+
+    return {
+      createTask,
+      isLoading,
+      isSuccess,
     };
   },
 };
