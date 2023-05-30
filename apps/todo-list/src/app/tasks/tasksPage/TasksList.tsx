@@ -1,9 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { css, styled } from 'styled-components';
-import { removeTask, selectHideDone } from 'app/tasks/tasksSlice';
+
+import { selectHideDone } from 'app/tasks/tasksSlice';
+import { tasksApiService } from 'app/tasks/tasksApiService';
 import { SEARCH_QUERY_PARAM_NAME } from './constants';
-import { tasksApiService } from '../tasksApiService';
+import { Task } from '../types';
 
 export const TasksList = () => {
   const location = useLocation();
@@ -14,12 +16,11 @@ export const TasksList = () => {
   const { taskList: tasks } = tasksApiService.getTasks();
 
   const hideDone = useSelector(selectHideDone);
-  const dispatch = useDispatch();
 
-  const { updateTask } = tasksApiService.updateTask();
+  const updateTask = tasksApiService.updateTask();
 
   const toggleTaskDone = (id: string) => {
-    updateTask({
+    updateTask.mutate({
       id,
       done: !tasks.find((task) => task.id === id)?.done,
       content: tasks.find((task) => task.id === id)?.content || '',
@@ -30,9 +31,23 @@ export const TasksList = () => {
 
   const removeTask = (id: string) => deleteTask(id);
 
+  const sortedTasks = tasks.sort((a, b) => Number(a.id) - Number(b.id));
+
+  const filterTasks = (tasks: Task[]) => {
+    if (!query || query.trim() === '') {
+      return tasks;
+    }
+
+    return tasks.filter(({ content }) =>
+      content.toUpperCase().includes(query.trim().toUpperCase())
+    );
+  };
+
+  const filteredTasks = filterTasks(sortedTasks);
+
   return (
     <StyledTaskList>
-      {tasks.map((task) => (
+      {filteredTasks.map((task) => (
         <ListItem key={task.id} hidden={task.done && hideDone}>
           <Button $toggleDone onClick={() => toggleTaskDone(task.id)}>
             {task.done ? '✔' : ' '}

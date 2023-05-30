@@ -46,17 +46,11 @@ export const tasksApiService = {
   updateTask: () => {
     const queryClient = useQueryClient();
 
-    const { mutate: updateTask, isLoading, isSuccess } = useMutation(restApi.updateTask, {
+    return useMutation(restApi.updateTask, {
       onSuccess: () => {
         queryClient.invalidateQueries(['tasks']);
       },
     });
-
-    return {
-      updateTask,
-      isLoading,
-      isSuccess,
-    };
   },
 
   deleteTask: () => {
