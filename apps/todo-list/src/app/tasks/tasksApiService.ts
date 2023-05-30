@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { restApi } from "services/restApi";
 import { isTaskListValid, isTaskValid } from "./typeguards";
 
