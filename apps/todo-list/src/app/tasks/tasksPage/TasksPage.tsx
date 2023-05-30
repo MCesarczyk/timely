@@ -28,18 +28,16 @@ export const TasksPage = () => {
           />
         }
         extraHeaderContent={
-          <>
-            <div>
-              <Button
-                disabled={state === 'loading'}
-                onClick={() => dispatch(fetchExampleTasks())}
-              >
-                {state === 'loading'
-                  ? descriptions[language].getExampleTasksButtonLoader
-                  : descriptions[language].getExampleTasksButtonText}
-              </Button>
-            </div>
-          </>
+          <div>
+            <Button
+              disabled={state === 'loading'}
+              onClick={() => dispatch(fetchExampleTasks())}
+            >
+              {state === 'loading'
+                ? descriptions[language].getExampleTasksButtonLoader
+                : descriptions[language].getExampleTasksButtonText}
+            </Button>
+          </div>
         }
       />
       <Section
