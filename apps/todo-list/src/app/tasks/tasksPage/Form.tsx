@@ -3,14 +3,14 @@ import { styled } from 'styled-components';
 
 import { Input } from 'app/tasks/tasksPage/Input';
 import { Button } from 'app/tasks/tasksPage/Button';
+import { descriptions } from 'common/languages/descriptions';
 import { tasksApiService } from '../tasksApiService';
 
 interface FormProps {
-  inputPlaceholder: string;
-  formButtonInnerText: string;
+  language: string;
 }
 
-export const Form = ({ inputPlaceholder, formButtonInnerText }: FormProps) => {
+export const Form = ({ language }: FormProps) => {
   const [newTaskContent, setNewTaskContent] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -41,11 +41,11 @@ export const Form = ({ inputPlaceholder, formButtonInnerText }: FormProps) => {
       <Input
         ref={inputRef}
         value={newTaskContent}
-        placeholder={inputPlaceholder}
+        placeholder={descriptions[language].inputPlaceholder}
         onChange={({ target }) => setNewTaskContent(target.value)}
         autoFocus
       />
-      <Button>{formButtonInnerText}</Button>
+      <Button>{descriptions[language].formButtonInnerText}</Button>
     </FormComponent>
   );
 };

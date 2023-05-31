@@ -7,18 +7,13 @@ import {
   selectHideDone,
   selectIfAllDone,
 } from 'app/tasks/tasksSlice';
+import { descriptions } from '~/common/languages/descriptions';
 
 interface FormButtonsProps {
-  setDoneButtonInnerText: string;
-  toggleButtonInnerTextHidden: string;
-  toggleButtonInnerTextVisible: string;
+  language: string;
 }
 
-export const FormButtons = ({
-  setDoneButtonInnerText,
-  toggleButtonInnerTextHidden,
-  toggleButtonInnerTextVisible,
-}: FormButtonsProps) => {
+export const FormButtons = ({ language }: FormButtonsProps) => {
   const tasks = useSelector(selectTasks);
   const hideDone = useSelector(selectHideDone);
   const allDone = useSelector(selectIfAllDone);
@@ -30,11 +25,11 @@ export const FormButtons = ({
         <>
           <Button onClick={() => dispatch(toggleHideDone())}>
             {hideDone
-              ? toggleButtonInnerTextHidden
-              : toggleButtonInnerTextVisible}
+              ? descriptions[language].toggleButtonInnerTextHidden
+              : descriptions[language].toggleButtonInnerTextVisible}
           </Button>
           <Button onClick={() => dispatch(setAllDone())} disabled={allDone}>
-            {setDoneButtonInnerText}
+            {descriptions[language].setDoneButtonInnerText}
           </Button>
         </>
       )}

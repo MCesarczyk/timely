@@ -17,10 +17,7 @@ export const TasksPage = () => {
       <Section
         title={descriptions[language].sectionTitle}
         body={
-          <Form
-            inputPlaceholder={descriptions[language].inputPlaceholder}
-            formButtonInnerText={descriptions[language].formButtonInnerText}
-          />
+          <Form language={language} />
         }
         extraHeaderContent={<></>}
       />
@@ -32,19 +29,7 @@ export const TasksPage = () => {
       <Section
         title={descriptions[language].tasksSectionTitle}
         body={<TasksList />}
-        extraHeaderContent={
-          <FormButtons
-            setDoneButtonInnerText={
-              descriptions[language].setDoneButtonInnerText
-            }
-            toggleButtonInnerTextVisible={
-              descriptions[language].toggleButtonInnerTextVisible
-            }
-            toggleButtonInnerTextHidden={
-              descriptions[language].toggleButtonInnerTextHidden
-            }
-          />
-        }
+        extraHeaderContent={<FormButtons language={language} />}
       />
     </main>
   );
