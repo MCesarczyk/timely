@@ -1,31 +1,38 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
-import {
-  selectTasks,
-  toggleHideDone,
-  setAllDone,
-  selectHideDone,
-  selectIfAllDone,
-} from 'app/tasks/tasksSlice';
-import { descriptions } from '~/common/languages/descriptions';
+
+import { setAllDone, selectIfAllDone } from 'app/tasks/tasksSlice';
+import { descriptions } from 'common/languages/descriptions';
+import { localStorageService } from 'services/localStorageService';
 import { tasksApiService } from '../tasksApiService';
+import { COMPLETED_TASKS_HIDDEN_KEY } from '../constants';
 
 interface FormButtonsProps {
   language: string;
+  hideDone: boolean;
+  setHideDone: (value: boolean) => void;
 }
 
-export const ListButtons = ({ language }: FormButtonsProps) => {
+export const ListButtons = ({
+  language,
+  hideDone,
+  setHideDone,
+}: FormButtonsProps) => {
   const { taskList: tasks } = tasksApiService.getTasks();
 
-  const hideDone = useSelector(selectHideDone);
   const allDone = useSelector(selectIfAllDone);
   const dispatch = useDispatch();
+
+  const toggleHideDone = () => {
+    setHideDone(!hideDone);
+    localStorageService.setValue(COMPLETED_TASKS_HIDDEN_KEY, !hideDone);
+  };
 
   return (
     <ButtonsWrapper>
       {tasks.length > 0 && (
         <>
-          <Button onClick={() => dispatch(toggleHideDone())}>
+          <Button onClick={toggleHideDone}>
             {hideDone
               ? descriptions[language].toggleButtonInnerTextHidden
               : descriptions[language].toggleButtonInnerTextVisible}

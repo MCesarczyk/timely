@@ -1,21 +1,21 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { css, styled } from 'styled-components';
 
-import { selectHideDone } from 'app/tasks/tasksSlice';
+import { Task } from 'app/tasks/types';
 import { tasksApiService } from 'app/tasks/tasksApiService';
 import { SEARCH_QUERY_PARAM_NAME } from './constants';
-import { Task } from '../types';
 
-export const TasksList = () => {
+interface TasksListProps {
+  hideDone: boolean;
+}
+
+export const TasksList = ({ hideDone }: TasksListProps) => {
   const location = useLocation();
   const query: string | null = new URLSearchParams(location.search).get(
     SEARCH_QUERY_PARAM_NAME
   );
 
   const { taskList: tasks } = tasksApiService.getTasks();
-
-  const hideDone = useSelector(selectHideDone);
 
   const updateTask = tasksApiService.updateTask();
 
@@ -45,9 +45,11 @@ export const TasksList = () => {
 
   const filteredTasks = filterTasks(sortedTasks);
 
+  const visibleTasks = hideDone ? filteredTasks.filter(({ done }) => !done) : tasks;
+
   return (
     <StyledTaskList>
-      {filteredTasks.map((task) => (
+      {visibleTasks.map((task) => (
         <ListItem key={task.id} hidden={task.done && hideDone}>
           <Button $toggleDone onClick={() => toggleTaskDone(task.id)}>
             {task.done ? '✔' : ' '}
