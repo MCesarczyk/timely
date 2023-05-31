@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import languageReducer from 'common/languages/languageSlice';
-import tasksReducer from 'app/tasks/tasksSlice';
 
 export const store = configureStore({
   reducer: {
-    tasks: tasksReducer,
     languages: languageReducer,
   },
 });
