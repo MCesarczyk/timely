@@ -6,7 +6,7 @@ import { Section } from 'common/Section';
 import { Form } from './Form';
 import { Search } from './Search';
 import { TasksList } from './TasksList';
-import { FormButtons } from './FormButtons';
+import { ListButtons } from './ListButtons';
 
 export const TasksPage = () => {
   const language = useSelector(selectLanguage);
@@ -29,7 +29,7 @@ export const TasksPage = () => {
       <Section
         title={descriptions[language].tasksSectionTitle}
         body={<TasksList />}
-        extraHeaderContent={<FormButtons language={language} />}
+        extraHeaderContent={<ListButtons language={language} />}
       />
     </main>
   );

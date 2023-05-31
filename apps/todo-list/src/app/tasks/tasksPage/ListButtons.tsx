@@ -14,7 +14,7 @@ interface FormButtonsProps {
   language: string;
 }
 
-export const FormButtons = ({ language }: FormButtonsProps) => {
+export const ListButtons = ({ language }: FormButtonsProps) => {
   const { taskList: tasks } = tasksApiService.getTasks();
 
   const hideDone = useSelector(selectHideDone);
