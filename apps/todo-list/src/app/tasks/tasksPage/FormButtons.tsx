@@ -8,13 +8,15 @@ import {
   selectIfAllDone,
 } from 'app/tasks/tasksSlice';
 import { descriptions } from '~/common/languages/descriptions';
+import { tasksApiService } from '../tasksApiService';
 
 interface FormButtonsProps {
   language: string;
 }
 
 export const FormButtons = ({ language }: FormButtonsProps) => {
-  const tasks = useSelector(selectTasks);
+  const { taskList: tasks } = tasksApiService.getTasks();
+
   const hideDone = useSelector(selectHideDone);
   const allDone = useSelector(selectIfAllDone);
   const dispatch = useDispatch();
