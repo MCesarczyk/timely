@@ -1,10 +1,8 @@
-import { useSelector, useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 
-import { setAllDone, selectIfAllDone } from 'app/tasks/tasksSlice';
 import { descriptions } from 'common/languages/descriptions';
+import { tasksApiService } from 'app/tasks/tasksApiService';
 import { localStorageService } from 'services/localStorageService';
-import { tasksApiService } from '../tasksApiService';
 import { COMPLETED_TASKS_HIDDEN_KEY } from '../constants';
 
 interface FormButtonsProps {
@@ -20,12 +18,23 @@ export const ListButtons = ({
 }: FormButtonsProps) => {
   const { taskList: tasks } = tasksApiService.getTasks();
 
-  const allDone = useSelector(selectIfAllDone);
-  const dispatch = useDispatch();
+  const allDone = tasks.every(({ done }) => done);
 
   const toggleHideDone = () => {
     setHideDone(!hideDone);
     localStorageService.setValue(COMPLETED_TASKS_HIDDEN_KEY, !hideDone);
+  };
+
+  const updateTask = tasksApiService.updateTask();
+
+  const markAllTasksDone = () => {
+    tasks.forEach(({ id }) => {
+      updateTask.mutate({
+        id,
+        done: true,
+        content: tasks.find((task) => task.id === id)?.content || '',
+      });
+    });
   };
 
   return (
@@ -37,7 +46,7 @@ export const ListButtons = ({
               ? descriptions[language].toggleButtonInnerTextHidden
               : descriptions[language].toggleButtonInnerTextVisible}
           </Button>
-          <Button onClick={() => dispatch(setAllDone())} disabled={allDone}>
+          <Button onClick={markAllTasksDone} disabled={allDone}>
             {descriptions[language].setDoneButtonInnerText}
           </Button>
         </>
