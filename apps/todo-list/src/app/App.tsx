@@ -6,14 +6,17 @@ import { Nav } from 'common/nav/Nav';
 import { TasksPage } from 'app/tasks/tasksPage/TasksPage';
 import { TaskPage } from 'app/tasks/TaskPage';
 import { AuthorPage } from 'app/author/AuthorPage';
+import { localStorageService } from '~/services/localStorageService';
+
+const savedLanguage = localStorageService.getValue('language', 'EN');
 
 export const LanguageContext = createContext({
-  language: 'EN',
+  language: savedLanguage,
   setLanguage: (language: string) => {},
 });
 
 export const App = () => {
-  const [language, setLanguage] = useState('EN');
+  const [language, setLanguage] = useState(savedLanguage);
 
   document.title = descriptions[language].headerTitle;
 

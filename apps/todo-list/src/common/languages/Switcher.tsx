@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 
 import { Descriptions } from 'types';
 import { LanguageContext } from 'app/App';
+import { localStorageService } from '~/services/localStorageService';
 
 interface SwitcherProps {
   descriptions: Descriptions;
@@ -11,10 +12,15 @@ interface SwitcherProps {
 export const Switcher = ({ descriptions }: SwitcherProps) => {
   const { setLanguage } = useContext(LanguageContext);
 
+  const onLanguageChange = (key: string) => {
+    setLanguage(key);
+    localStorageService.setValue('language', key);
+  };
+
   return (
     <div>
       {Object.keys(descriptions).map((key) => (
-        <Button key={key} value={key} onClick={() => setLanguage(key)}>
+        <Button key={key} value={key} onClick={() => onLanguageChange(key)}>
           {key}
         </Button>
       ))}
