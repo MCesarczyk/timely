@@ -22,7 +22,7 @@ export const ListButtons = ({
 
   const toggleHideDone = () => {
     setHideDone(!hideDone);
-    localStorageService.setValue(COMPLETED_TASKS_HIDDEN_KEY, !hideDone);
+    localStorageService.setValue(COMPLETED_TASKS_HIDDEN_KEY, String(hideDone));
   };
 
   const updateTask = tasksApiService.updateTask();
