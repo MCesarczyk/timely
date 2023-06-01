@@ -2,12 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 
 import { App } from 'app/App';
-import { store } from 'store';
 import { theme } from 'theme';
 import { GlobalStyle } from 'GlobalStyle';
 import { DEFAULT_CACHE_TIME, DEFAULT_STALE_TIME } from 'common/constants';
@@ -28,13 +26,11 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <Normalize />
-          <GlobalStyle />
-          <App />
-        </ThemeProvider>
-      </Provider>
+      <ThemeProvider theme={theme}>
+        <Normalize />
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );
