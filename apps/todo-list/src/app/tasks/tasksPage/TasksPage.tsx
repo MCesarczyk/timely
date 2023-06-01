@@ -1,19 +1,18 @@
-import { useSelector } from 'react-redux';
-
 import { COMPLETED_TASKS_HIDDEN_KEY } from 'app/tasks/constants';
 import { localStorageService } from 'services/localStorageService';
 import { descriptions } from 'common/languages/descriptions';
-import { selectLanguage } from 'common/languages/languageSlice';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
 import { Form } from './Form';
 import { Search } from './Search';
 import { TasksList } from './TasksList';
 import { ListButtons } from './ListButtons';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { LanguageContext } from '~/app/App';
 
 export const TasksPage = () => {
-  const language = useSelector(selectLanguage);
+  const { language } = useContext(LanguageContext);
+
   const [hideDone, setHideDone] = useState(
     localStorageService.getValue(COMPLETED_TASKS_HIDDEN_KEY, 'false')
   );

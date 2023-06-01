@@ -1,13 +1,15 @@
-import { useSelector } from 'react-redux';
+import { useContext } from 'react';
+
 import { descriptions } from 'common/languages/descriptions';
-import { selectLanguage } from 'common/languages/languageSlice';
+import { useRequiredRouteParams } from 'common/hooks';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
 import { tasksApiService } from './tasksApiService';
-import { useRequiredRouteParams } from '~/common/hooks';
+import { LanguageContext } from '../App';
 
 export const TaskPage = () => {
-  const language = useSelector(selectLanguage);
+  const { language } = useContext(LanguageContext);
+
   const id = useRequiredRouteParams('id');
 
   const { task } = tasksApiService.getTask(id);
