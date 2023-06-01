@@ -4,7 +4,7 @@ export const localStorageService = {
     return localStorageValue ? JSON.parse(localStorageValue) : fallback;
   },
 
-  setValue: (reference: string, value: string | Object) => {
+  setValue: (reference: string, value: string | object) => {
     localStorage.setItem(reference, JSON.stringify(value));
   },
 
