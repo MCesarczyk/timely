@@ -15,9 +15,9 @@ export const TasksList = ({ hideDone }: TasksListProps) => {
     SEARCH_QUERY_PARAM_NAME
   );
 
-  const { taskList: tasks } = tasksApiService.getTasks();
+  const { taskList: tasks } = tasksApiService.useGetTasks();
 
-  const updateTask = tasksApiService.updateTask();
+  const updateTask = tasksApiService.useUpdateTask();
 
   const toggleTaskDone = (id: string) => {
     updateTask.mutate({
@@ -27,7 +27,7 @@ export const TasksList = ({ hideDone }: TasksListProps) => {
     });
   };
 
-  const { deleteTask } = tasksApiService.deleteTask();
+  const { deleteTask } = tasksApiService.useDeleteTask();
 
   const removeTask = (id: string) => deleteTask(id);
 

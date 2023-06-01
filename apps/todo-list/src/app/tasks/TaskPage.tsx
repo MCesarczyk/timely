@@ -12,7 +12,7 @@ export const TaskPage = () => {
 
   const id = useRequiredRouteParams('id');
 
-  const { task } = tasksApiService.getTask(id);
+  const { task } = tasksApiService.useGetTask(id);
 
   return (
     <main>

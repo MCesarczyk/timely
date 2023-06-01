@@ -3,7 +3,7 @@ import { restApi } from "services/restApi";
 import { isTaskListValid, isTaskValid } from "./typeguards";
 
 export const tasksApiService = {
-  getTasks: () => {
+  useGetTasks: () => {
     const { data, isLoading, error } = useQuery(['tasks'], () => restApi.getTasks());
 
     const taskList = isTaskListValid(data) ? data : [];
@@ -15,7 +15,7 @@ export const tasksApiService = {
     };
   },
 
-  getTask: (id: string) => {
+  useGetTask: (id: string) => {
     const { data, isLoading, error } = useQuery(['task', { id }], () => restApi.getTask(id));
 
     const task = isTaskValid(data) ? data : null;
@@ -27,7 +27,7 @@ export const tasksApiService = {
     };
   },
 
-  createTask: () => {
+  useCreateTask: () => {
     const queryClient = useQueryClient();
 
     const { mutate: createTask, isLoading, isSuccess } = useMutation(restApi.createTask, {
@@ -43,7 +43,7 @@ export const tasksApiService = {
     };
   },
 
-  updateTask: () => {
+  useUpdateTask: () => {
     const queryClient = useQueryClient();
 
     return useMutation(restApi.updateTask, {
@@ -53,7 +53,7 @@ export const tasksApiService = {
     });
   },
 
-  deleteTask: () => {
+  useDeleteTask: () => {
     const queryClient = useQueryClient();
 
     const { mutate: deleteTask, isLoading, isSuccess } = useMutation(restApi.deleteTask, {

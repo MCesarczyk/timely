@@ -16,7 +16,7 @@ export const ListButtons = ({
   hideDone,
   setHideDone,
 }: FormButtonsProps) => {
-  const { taskList: tasks } = tasksApiService.getTasks();
+  const { taskList: tasks } = tasksApiService.useGetTasks();
 
   const allDone = tasks.every(({ done }) => done);
 
@@ -25,7 +25,7 @@ export const ListButtons = ({
     localStorageService.setValue(COMPLETED_TASKS_HIDDEN_KEY, String(hideDone));
   };
 
-  const updateTask = tasksApiService.updateTask();
+  const updateTask = tasksApiService.useUpdateTask();
 
   const markAllTasksDone = () => {
     tasks.forEach(({ id }) => {

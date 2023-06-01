@@ -14,7 +14,7 @@ export const Form = ({ language }: FormProps) => {
   const [newTaskContent, setNewTaskContent] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const { createTask } = tasksApiService.createTask();
+  const { createTask } = tasksApiService.useCreateTask();
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
