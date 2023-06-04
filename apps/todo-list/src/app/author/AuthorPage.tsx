@@ -4,14 +4,10 @@ import { descriptions } from 'common/languages/descriptions';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
 import { LanguageContext } from '../App';
-import { authorApiService } from './authorApiService';
-import { Tile } from './Tile';
 import { styled } from 'styled-components';
 
 export const AuthorPage = () => {
   const { language } = useContext(LanguageContext);
-
-  const { reposList, isLoading } = authorApiService.useGetAuthorRepos();
 
   return (
     <main>
@@ -21,23 +17,6 @@ export const AuthorPage = () => {
         body={descriptions[language].authorPageContent}
         extraHeaderContent={<></>}
       />
-      {isLoading ? 'isLoading...' : ''}
-      <GalleryHeader>
-        {descriptions[language].authorPageReposHeader}
-      </GalleryHeader>
-      <GalleryWrapper>
-        {reposList &&
-          reposList.map((repo) => (
-            <Tile
-              key={repo.id}
-              title={repo.name}
-              description={repo.description}
-              codeLink={repo.html_url}
-              demoLink={repo.homepage}
-              language={language}
-            />
-          ))}
-      </GalleryWrapper>
     </main>
   );
 };
