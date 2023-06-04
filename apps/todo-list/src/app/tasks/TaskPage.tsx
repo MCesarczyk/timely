@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
+import MDEditor from '@uiw/react-md-editor';
 
 import { descriptions } from 'common/languages/descriptions';
 import { useRequiredRouteParams } from 'common/hooks';
@@ -46,10 +47,10 @@ export const TaskPage = () => {
     });
   };
 
-  const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onContentChange = (value: string | undefined) => {
     setTaskBatch({
       ...taskBatch,
-      content: e.target.value,
+      content: value || '',
     });
   };
 
@@ -91,11 +92,17 @@ export const TaskPage = () => {
                   : descriptions[language].taskStatusUndone
                 : ''}
             </div>
-            {editMode ? (
-              <Textarea value={taskBatch.content} onChange={onContentChange} />
-            ) : (
-              <p>{task?.content}</p>
-            )}
+            <TextareaWrapper data-color-mode="light">
+              {editMode ? (
+                <MDEditor
+                  height={300}
+                  value={taskBatch.content}
+                  onChange={onContentChange}
+                />
+              ) : (
+                <MDEditor.Markdown source={task?.content} />
+              )}
+            </TextareaWrapper>
           </TaskContentWrapper>
         }
         extraHeaderContent={
@@ -120,6 +127,10 @@ export const TaskPage = () => {
 const TaskContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const TextareaWrapper = styled.div`
+  padding-top: 24px;
 `;
 
 const Textarea = styled.textarea`
