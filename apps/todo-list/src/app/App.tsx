@@ -12,11 +12,12 @@ const savedLanguage = localStorageService.getValue('language', 'EN');
 
 export const LanguageContext = createContext({
   language: savedLanguage,
-  setLanguage: (language: string) => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setLanguage: (savedLanguage: string) => {},
 });
 
 export const App = () => {
-  const [language, setLanguage] = useState(savedLanguage);
+  const [language, setLanguage] = useState<string>(savedLanguage);
 
   document.title = descriptions[language].headerTitle;
 

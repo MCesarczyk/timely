@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
+import MDEditor from '@uiw/react-md-editor';
 
 import { descriptions } from 'common/languages/descriptions';
 import { useRequiredRouteParams } from 'common/hooks';
@@ -46,10 +47,10 @@ export const TaskPage = () => {
     });
   };
 
-  const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onContentChange = (value: string | undefined) => {
     setTaskBatch({
       ...taskBatch,
-      content: e.target.value,
+      content: value || '',
     });
   };
 
@@ -61,6 +62,7 @@ export const TaskPage = () => {
       content: task?.content || '',
       done: task?.done || false,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editMode]);
 
   return (
@@ -91,11 +93,17 @@ export const TaskPage = () => {
                   : descriptions[language].taskStatusUndone
                 : ''}
             </div>
-            {editMode ? (
-              <Textarea value={taskBatch.content} onChange={onContentChange} />
-            ) : (
-              <p>{task?.content}</p>
-            )}
+            <TextareaWrapper data-color-mode="light">
+              {editMode ? (
+                <MDEditor
+                  height={300}
+                  value={taskBatch.content}
+                  onChange={onContentChange}
+                />
+              ) : (
+                <MDEditor.Markdown source={task?.content} />
+              )}
+            </TextareaWrapper>
           </TaskContentWrapper>
         }
         extraHeaderContent={
@@ -122,10 +130,6 @@ const TaskContentWrapper = styled.div`
   flex-direction: column;
 `;
 
-const Textarea = styled.textarea`
-  border: solid 1px ${({ theme }) => theme.color.borders};
-  padding: 10px;
-  flex-grow: 1;
-  margin: 10px;
-  resize: vertical;
+const TextareaWrapper = styled.div`
+  padding-top: 24px;
 `;

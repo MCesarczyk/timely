@@ -23,12 +23,12 @@ export const TasksPage = () => {
       <Section
         title={descriptions[language].sectionTitle}
         body={<Form language={language} />}
-        extraHeaderContent={<></>}
+        extraHeaderContent={null}
       />
       <Section
         title={descriptions[language].searchSectionTitle}
         body={<Search />}
-        extraHeaderContent={<></>}
+        extraHeaderContent={null}
       />
       <Section
         title={descriptions[language].tasksSectionTitle}

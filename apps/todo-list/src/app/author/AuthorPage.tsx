@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import { descriptions } from 'common/languages/descriptions';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
+import { Spinner } from 'components/Spinner';
 import { LanguageContext } from '../App';
 import { authorApiService } from './authorApiService';
 import { Tile } from './Tile';
@@ -19,9 +20,16 @@ export const AuthorPage = () => {
       <Section
         title="Michał Cesarczyk"
         body={descriptions[language].authorPageContent}
-        extraHeaderContent={<></>}
+        extraHeaderContent={null}
       />
-      {isLoading ? 'isLoading...' : ''}
+      <GalleryHeader>
+        {descriptions[language].authorPageReposHeader}
+      </GalleryHeader>
+      {isLoading && (
+        <SpinnerWrapper>
+          <Spinner caption="Please wait while projects are being loaded..." />
+        </SpinnerWrapper>
+      )}
       <GalleryWrapper>
         {reposList &&
           reposList.map((repo) => (
@@ -47,6 +55,11 @@ const GalleryHeader = styled.h2`
   @media (max-width: ${({ theme }) => theme.breakpoint.mobileMax}) {
     font-size: 18px;
   }
+`;
+
+const SpinnerWrapper = styled.div`
+  display: grid;
+  place-items: center;
 `;
 
 const GalleryWrapper = styled.div`
