@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Task } from "app/tasks/types";
-import { API_URLS } from "services/apiUrls";
+import { API_URLS } from "app/tasks/tasksApiUrls";
 
 export const restApi = {
   getTasks: async () => {

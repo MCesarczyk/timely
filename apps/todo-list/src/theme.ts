@@ -11,7 +11,10 @@ export const theme = {
     remove: 'crimson',
   },
   breakpoint: {
+    mobileMin: "320px",
     mobileMax: '480px',
     tabletMax: '768px',
+    netbookMax: "1024px",
+    notebookMax: "1280px"
   },
 };
