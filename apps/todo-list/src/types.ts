@@ -3,9 +3,3 @@ export interface Descriptions {
     [property: string]: string;
   };
 }
-
-export interface Task {
-  content: string;
-  done: boolean;
-  id: string;
-}

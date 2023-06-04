@@ -19,11 +19,10 @@ export const TasksList = ({ hideDone }: TasksListProps) => {
 
   const updateTask = tasksApiService.useUpdateTask();
 
-  const toggleTaskDone = (id: string) => {
+  const toggleTaskDone = (task: Task) => {
     updateTask.mutate({
-      id,
-      done: !tasks.find((task) => task.id === id)?.done,
-      content: tasks.find((task) => task.id === id)?.content || '',
+      ...task,
+      done: !tasks.find(({ id }) => id === task.id)?.done,
     });
   };
 
@@ -45,13 +44,15 @@ export const TasksList = ({ hideDone }: TasksListProps) => {
 
   const filteredTasks = filterTasks(sortedTasks);
 
-  const visibleTasks = hideDone ? filteredTasks.filter(({ done }) => !done) : tasks;
+  const visibleTasks = hideDone
+    ? filteredTasks.filter(({ done }) => !done)
+    : tasks;
 
   return (
     <StyledTaskList>
       {visibleTasks.map((task) => (
         <ListItem key={task.id} hidden={task.done && hideDone}>
-          <Button $toggleDone onClick={() => toggleTaskDone(task.id)}>
+          <Button $toggleDone onClick={() => toggleTaskDone(task)}>
             {task.done ? '✔' : ' '}
           </Button>
           <TaskContent $done={task.done}>

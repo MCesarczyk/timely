@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Task } from "types";
+import { Task } from "app/tasks/types";
 import { API_URLS } from "services/apiUrls";
 
 export const restApi = {

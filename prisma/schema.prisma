@@ -11,17 +11,21 @@ datasource db {
 }
 
 model User {
-  id    Int     @default(autoincrement()) @id
+  id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
   todos Todo[]
 }
 
 model Todo {
-  id        Int      @default(autoincrement()) @id
-  content   String
-  done Boolean? @default(false)
-  author    User?    @relation(fields: [authorId], references: [id])
+  id        Int       @id @default(autoincrement())
+  title     String? @default("lorem ipsum")
+  content   String? @default("dolor sit amet consectetur adipiscing elit")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  done      Boolean  @default(false)
+  author    User?     @relation(fields: [authorId], references: [id])
   authorId  Int?
-	@@map("Todo")
+
+  @@map("Todo")
 }
