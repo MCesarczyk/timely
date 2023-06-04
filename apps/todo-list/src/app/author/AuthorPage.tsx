@@ -1,16 +1,21 @@
-import { useSelector } from 'react-redux';
-import { selectLanguage } from 'common/languages/languageSlice';
+import { useContext } from 'react';
+
 import { descriptions } from 'common/languages/descriptions';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
+import { LanguageContext } from '../App';
 
 export const AuthorPage = () => {
-  const language: string = useSelector(selectLanguage);
+  const { language } = useContext(LanguageContext);
 
   return (
     <main>
       <Header title={descriptions[language].authorPageTitle} />
-      <Section title="Michał Cesarczyk" body={descriptions[language].authorPageContent} extraHeaderContent={<></>} />
+      <Section
+        title="Michał Cesarczyk"
+        body={descriptions[language].authorPageContent}
+        extraHeaderContent={<></>}
+      />
     </main>
   );
 };

@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import { HeaderWrapper } from 'common/HeaderWrapper';
 
 interface SectionProps {
-  title: string;
+  title: ReactNode;
   body: ReactNode;
   extraHeaderContent?: JSX.Element;
 }

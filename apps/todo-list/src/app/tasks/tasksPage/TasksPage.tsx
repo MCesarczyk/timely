@@ -1,46 +1,29 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { COMPLETED_TASKS_HIDDEN_KEY } from 'app/tasks/constants';
+import { localStorageService } from 'services/localStorageService';
 import { descriptions } from 'common/languages/descriptions';
-import { selectLanguage } from 'common/languages/languageSlice';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
-import { fetchExampleTasks, selectState } from 'app/tasks/tasksSlice';
 import { Form } from './Form';
 import { Search } from './Search';
 import { TasksList } from './TasksList';
-import { FormButtons } from './FormButtons';
-import { Button } from './Button';
+import { ListButtons } from './ListButtons';
+import { useContext, useState } from 'react';
+import { LanguageContext } from '~/app/App';
 
 export const TasksPage = () => {
-  const language = useSelector(selectLanguage);
-  const state = useSelector(selectState);
+  const { language } = useContext(LanguageContext);
 
-  const dispatch = useDispatch();
+  const [hideDone, setHideDone] = useState(
+    localStorageService.getValue(COMPLETED_TASKS_HIDDEN_KEY, 'false')
+  );
 
   return (
     <main>
       <Header title={descriptions[language].headerTitle} />
       <Section
         title={descriptions[language].sectionTitle}
-        body={
-          <Form
-            inputPlaceholder={descriptions[language].inputPlaceholder}
-            formButtonInnerText={descriptions[language].formButtonInnerText}
-          />
-        }
-        extraHeaderContent={
-          <>
-            <div>
-              <Button
-                disabled={state === 'loading'}
-                onClick={() => dispatch(fetchExampleTasks())}
-              >
-                {state === 'loading'
-                  ? descriptions[language].getExampleTasksButtonLoader
-                  : descriptions[language].getExampleTasksButtonText}
-              </Button>
-            </div>
-          </>
-        }
+        body={<Form language={language} />}
+        extraHeaderContent={<></>}
       />
       <Section
         title={descriptions[language].searchSectionTitle}
@@ -49,18 +32,12 @@ export const TasksPage = () => {
       />
       <Section
         title={descriptions[language].tasksSectionTitle}
-        body={<TasksList />}
+        body={<TasksList hideDone={hideDone} />}
         extraHeaderContent={
-          <FormButtons
-            setDoneButtonInnerText={
-              descriptions[language].setDoneButtonInnerText
-            }
-            toggleButtonInnerTextVisible={
-              descriptions[language].toggleButtonInnerTextVisible
-            }
-            toggleButtonInnerTextHidden={
-              descriptions[language].toggleButtonInnerTextHidden
-            }
+          <ListButtons
+            language={language}
+            hideDone={hideDone}
+            setHideDone={setHideDone}
           />
         }
       />

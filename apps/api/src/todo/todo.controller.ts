@@ -29,6 +29,7 @@ export class TodoController {
     return this.todoService.updateTodo({
       where: { id: Number(id) },
       data: {
+        title: updateTodo.title,
         content: updateTodo.content,
         done: updateTodo.done
       }

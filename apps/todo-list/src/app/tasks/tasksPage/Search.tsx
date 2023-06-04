@@ -1,17 +1,18 @@
-import { ChangeEvent } from 'react';
-import { useSelector } from 'react-redux';
+import { ChangeEvent, useContext } from 'react';
+
 import { styled } from 'styled-components';
 import {
   useQueryParameter,
   useReplaceQueryParameter,
 } from 'app/tasks/tasksPage/queryParameters';
 import { Input } from 'app/tasks/tasksPage/Input';
-import { selectLanguage } from 'common/languages/languageSlice';
 import { descriptions } from 'common/languages/descriptions';
 import { SEARCH_QUERY_PARAM_NAME } from './constants';
+import { LanguageContext } from '~/app/App';
 
 export const Search = () => {
-  const language = useSelector(selectLanguage);
+  const { language } = useContext(LanguageContext);
+
   const query = useQueryParameter(SEARCH_QUERY_PARAM_NAME);
   const replaceQueryParameter = useReplaceQueryParameter();
 

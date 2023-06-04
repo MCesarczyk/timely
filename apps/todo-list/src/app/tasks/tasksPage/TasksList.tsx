@@ -1,38 +1,64 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { css, styled } from 'styled-components';
-import { RootState } from 'store';
-import {
-  selectTasksByQuery,
-  toggleTaskDone,
-  removeTask,
-  selectHideDone,
-} from 'app/tasks/tasksSlice';
+
+import { Task } from 'app/tasks/types';
+import { tasksApiService } from 'app/tasks/tasksApiService';
 import { SEARCH_QUERY_PARAM_NAME } from './constants';
 
-export const TasksList = () => {
+interface TasksListProps {
+  hideDone: boolean;
+}
+
+export const TasksList = ({ hideDone }: TasksListProps) => {
   const location = useLocation();
   const query: string | null = new URLSearchParams(location.search).get(
     SEARCH_QUERY_PARAM_NAME
   );
 
-  const tasks = useSelector((state: RootState) =>
-    selectTasksByQuery(state, query)
-  );
-  const hideDone = useSelector(selectHideDone);
-  const dispatch = useDispatch();
+  const { taskList: tasks } = tasksApiService.useGetTasks();
+
+  const updateTask = tasksApiService.useUpdateTask();
+
+  const toggleTaskDone = (task: Task) => {
+    updateTask.mutate({
+      ...task,
+      done: !tasks.find(({ id }) => id === task.id)?.done,
+    });
+  };
+
+  const { deleteTask } = tasksApiService.useDeleteTask();
+
+  const removeTask = (id: string) => deleteTask(id);
+
+  const sortedTasks = tasks.sort((a, b) => Number(a.id) - Number(b.id));
+
+  const filterTasks = (tasks: Task[]) => {
+    if (!query || query.trim() === '') {
+      return tasks;
+    }
+
+    return tasks.filter(({ content }) =>
+      content.toUpperCase().includes(query.trim().toUpperCase())
+    );
+  };
+
+  const filteredTasks = filterTasks(sortedTasks);
+
+  const visibleTasks = hideDone
+    ? filteredTasks.filter(({ done }) => !done)
+    : tasks;
 
   return (
     <StyledTaskList>
-      {tasks.map((task) => (
+      {visibleTasks.map((task) => (
         <ListItem key={task.id} hidden={task.done && hideDone}>
-          <Button $toggleDone onClick={() => dispatch(toggleTaskDone(task.id))}>
+          <Button $toggleDone onClick={() => toggleTaskDone(task)}>
             {task.done ? '✔' : ' '}
           </Button>
           <TaskContent $done={task.done}>
-            <StyledLink to={`/tasks/${task.id}`}>{task.content}</StyledLink>
+            <StyledLink to={`/tasks/${task.id}`}>{task.title}</StyledLink>
           </TaskContent>
-          <Button $remove onClick={() => dispatch(removeTask(task.id))}>
+          <Button $remove onClick={() => removeTask(task.id)}>
             🗑
           </Button>
         </ListItem>

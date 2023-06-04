@@ -1,11 +1,12 @@
 import { styled } from 'styled-components';
 
-export const Button = styled.button`
+export const Button = styled.button<{ color?: string; background?: string }>`
   display: flex;
   align-content: center;
   justify-content: center;
-  color: ${({ theme }) => theme.color.fontLight};
-  background-color: ${({ theme }) => theme.color.primary};
+  color: ${({ color }) => color || (({ theme }) => theme.color.fontLight)};
+  background-color: ${({ background }) =>
+    background || (({ theme }) => theme.color.primary)};
   border: none;
   padding: 5px;
   padding: 10px;

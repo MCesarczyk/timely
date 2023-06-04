@@ -1,7 +1,7 @@
 {
   "name": "timely",
   "version": "0.0.0",
-  "proxy": "http://localhost:3333",
+  "proxy": "http://localhost:4000",
   "license": "MIT",
   "scripts": {
     "seed": "prisma db seed"
@@ -15,7 +15,8 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@prisma/client": "^4.14.1",
-    "@reduxjs/toolkit": "^1.6.1",
+    "@tanstack/react-query": "^4.29.12",
+    "@tanstack/react-query-devtools": "^4.29.12",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
@@ -25,9 +26,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-is": "18.2.0",
-    "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
-    "redux-saga": "^1.1.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
     "styled-components": "^6.0.0-rc.1",

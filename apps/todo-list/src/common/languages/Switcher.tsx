@@ -1,19 +1,26 @@
-import { useDispatch } from 'react-redux';
+import { useContext } from 'react';
 import { styled } from 'styled-components';
+
 import { Descriptions } from 'types';
-import { changeLanguage } from 'common/languages/languageSlice';
+import { LanguageContext } from 'app/App';
+import { localStorageService } from '~/services/localStorageService';
 
 interface SwitcherProps {
   descriptions: Descriptions;
 }
 
 export const Switcher = ({ descriptions }: SwitcherProps) => {
-  const dispatch = useDispatch();
+  const { setLanguage } = useContext(LanguageContext);
+
+  const onLanguageChange = (key: string) => {
+    setLanguage(key);
+    localStorageService.setValue('language', key);
+  };
 
   return (
     <div>
       {Object.keys(descriptions).map((key) => (
-        <Button key={key} value={key} onClick={() => dispatch(changeLanguage(key))}>
+        <Button key={key} value={key} onClick={() => onLanguageChange(key)}>
           {key}
         </Button>
       ))}
