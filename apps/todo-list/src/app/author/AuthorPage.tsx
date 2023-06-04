@@ -1,12 +1,12 @@
 import { useContext } from 'react';
+import { styled } from 'styled-components';
 
 import { descriptions } from 'common/languages/descriptions';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
-import { LanguageContext } from '../App';
 import { authorApiService } from './authorApiService';
+import { LanguageContext } from '../App';
 import { Tile } from './Tile';
-import { styled } from 'styled-components';
 
 export const AuthorPage = () => {
   const { language } = useContext(LanguageContext);
