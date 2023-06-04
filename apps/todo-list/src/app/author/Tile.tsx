@@ -1,27 +1,37 @@
 import styled from 'styled-components';
+import { descriptions } from 'common/languages/descriptions';
 
 interface TileProps {
   title: string;
   description: string;
   demoLink: string;
   codeLink: string;
+  language: string;
 }
 
-export const Tile = ({ title, description, demoLink, codeLink }: TileProps) => (
+export const Tile = ({
+  title,
+  description,
+  demoLink,
+  codeLink,
+  language,
+}: TileProps) => (
   <TileBody>
     <TileHeader>{title}</TileHeader>
     <p>{description}</p>
     <TileList>
       <li key={demoLink}>
-        Demo:{' '}
+        {descriptions[language].authorPageRepoDemoLabel}:{' '}
         <TileLink href={demoLink} target="_blank">
-          {demoLink ? 'Live' : 'Not available'}
+          {demoLink
+            ? descriptions[language].authorPageRepoDemoUrlLive
+            : descriptions[language].authorPageRepoDemoUrlUnavailable}
         </TileLink>
       </li>
       <li key={codeLink}>
-        Code:{' '}
+        {descriptions[language].authorPageRepoCodeLabel}:{' '}
         <TileLink href={codeLink} target="_blank">
-          Repository
+          {descriptions[language].authorPageRepoCodeUrl}
         </TileLink>
       </li>
     </TileList>
@@ -36,7 +46,7 @@ export const TileBody = styled.div`
   border: ${({ theme }) => theme.border};
   box-shadow: ${({ theme }) => theme.shadow};
   transition: color ease-in 2s, background-color ease-in 2s,
-  box shadow ease-in 1s;
+    box shadow ease-in 1s;
 
   &:hover {
     box-shadow: 0px 0px 6px 0px ${({ theme }) => theme.color.themeColor};

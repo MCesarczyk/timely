@@ -22,6 +22,9 @@ export const AuthorPage = () => {
         extraHeaderContent={<></>}
       />
       {isLoading ? 'isLoading...' : ''}
+      <GalleryHeader>
+        {descriptions[language].authorPageReposHeader}
+      </GalleryHeader>
       <GalleryWrapper>
         {reposList &&
           reposList.map((repo) => (
@@ -31,12 +34,23 @@ export const AuthorPage = () => {
               description={repo.description}
               codeLink={repo.html_url}
               demoLink={repo.homepage}
+              language={language}
             />
           ))}
       </GalleryWrapper>
     </main>
   );
 };
+
+const GalleryHeader = styled.h2`
+  font-size: 24px;
+  font-weight: 900;
+  margin-top: 36px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.mobileMax}) {
+    font-size: 18px;
+  }
+`;
 
 const GalleryWrapper = styled.div`
   display: grid;
