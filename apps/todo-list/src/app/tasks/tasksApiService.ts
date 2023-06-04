@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { restApi } from "services/restApi";
+import { restApi } from "app/tasks/tasksApiAdapter";
 import { isTaskListValid, isTaskValid } from "./typeguards";
 
 export const tasksApiService = {
