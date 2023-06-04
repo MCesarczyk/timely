@@ -56,7 +56,7 @@ export const TasksList = ({ hideDone }: TasksListProps) => {
             {task.done ? '✔' : ' '}
           </Button>
           <TaskContent $done={task.done}>
-            <StyledLink to={`/tasks/${task.id}`}>{task.content}</StyledLink>
+            <StyledLink to={`/tasks/${task.id}`}>{task.title}</StyledLink>
           </TaskContent>
           <Button $remove onClick={() => removeTask(task.id)}>
             🗑

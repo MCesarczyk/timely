@@ -35,6 +35,10 @@ export const TaskPage = () => {
     setEditMode((editMode) => !editMode);
   };
 
+  const exitEditMode = () => {
+    setEditMode(false);
+  };
+
   const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTaskBatch({
       ...taskBatch,
@@ -50,14 +54,13 @@ export const TaskPage = () => {
   };
 
   useEffect(() => {
-    if (!editMode && task) {
-      setTaskBatch({
-        ...taskBatch,
-        id: task.id,
-        title: task?.title || '',
-        content: task?.content || '',
-      });
-    }
+    setTaskBatch({
+      ...taskBatch,
+      id: id,
+      title: task?.title || '',
+      content: task?.content || '',
+      done: task?.done || false,
+    });
   }, [editMode]);
 
   return (
@@ -96,9 +99,18 @@ export const TaskPage = () => {
           </TaskContentWrapper>
         }
         extraHeaderContent={
-          <Button color="#000" background="#ffb200" onClick={toggleEditMode}>
-            {editMode ? 'Update' : 'Edit'}
-          </Button>
+          <>
+            <Button color="#000" background="#ffb200" onClick={toggleEditMode}>
+              {editMode
+                ? descriptions[language].taskPageUpdateButtonText
+                : descriptions[language].taskPageEditButtonText}
+            </Button>
+            {editMode && (
+              <Button color="#fff" background="#dc143c" onClick={exitEditMode}>
+                {descriptions[language].taskPageCancelButtonText}
+              </Button>
+            )}
+          </>
         }
       />
     </main>
