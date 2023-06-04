@@ -6,6 +6,7 @@ import { Header } from 'common/Header';
 import { Section } from 'common/Section';
 import { LanguageContext } from '../App';
 import { authorApiService } from './authorApiService';
+import { Tile } from './Tile';
 
 export const AuthorPage = () => {
   const { language } = useContext(LanguageContext);
@@ -21,7 +22,19 @@ export const AuthorPage = () => {
         extraHeaderContent={<></>}
       />
       {isLoading ? 'isLoading...' : ''}
-      <ul>{reposList && reposList.map((repo) => <li>{`${repo.name}`}</li>)}</ul>
+      <GalleryWrapper>
+        {reposList &&
+          reposList.map((repo) => (
+            <Tile
+              key={repo.id}
+              title={repo.name}
+              description={repo.description}
+              codeLink={repo.html_url}
+              demoLink={repo.homepage}
+              language={language}
+            />
+          ))}
+      </GalleryWrapper>
     </main>
   );
 };
