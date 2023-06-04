@@ -25,7 +25,7 @@ export const descriptions: Descriptions = {
     getExampleTasksButtonLoader: 'Loading...',
     authorPageTitle: 'About author',
     authorPageContent:
-      "My name is Michał and I'm Typescript-React-based frontend developer. Currently I'm working a lot with geospatial functionalities, maps, remote sensing data. In free time I exercise with Node.js, Prisma, Nest, NX, PostgreSQL and learn about software architecture.",
+      "My name is Michał and I'm Typescript-React-based frontend developer. Currently I'm working a lot with geospatial functionalities, maps, remote sensing data. In free time I exercise with Node.js, Prisma, Nest, NX, PostgreSQL and learn about software architecture. Below are list of my last updated public repositories.",
   },
   PL: {
     headerTitle: 'Lista zadań',
@@ -51,6 +51,6 @@ export const descriptions: Descriptions = {
     getExampleTasksButtonLoader: 'Ładowanie...',
     authorPageTitle: 'O autorze',
     authorPageContent:
-      'Mam na imię Michał i jestem frontend developerem opartym na Typescript i React. Obecnie dużo pracuję z funkcjonalnościami geoprzestrzennymi, mapami, danymi z teledetekcji. W wolnym czasie ćwiczę Node.js, Prisma, Nest, NX, PostgreSQL i uczę się o architekturze oprogramowania.',
+      'Mam na imię Michał i jestem frontend developerem opartym na Typescript i React. Obecnie dużo pracuję z funkcjonalnościami geoprzestrzennymi, mapami, danymi z teledetekcji. W wolnym czasie ćwiczę Node.js, Prisma, Nest, NX, PostgreSQL i uczę się o architekturze oprogramowania. Poniżej lista moich ostatio zaktualizowanych publicznych repozytoriów.',
   },
 };
