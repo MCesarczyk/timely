@@ -35,6 +35,7 @@ export class TodoService {
         id: number
       },
       data: {
+        title: string,
         content: string,
         done: boolean
       }

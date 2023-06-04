@@ -49,6 +49,7 @@ export const tasksApiService = {
     return useMutation(restApi.updateTask, {
       onSuccess: () => {
         queryClient.invalidateQueries(['tasks']);
+        queryClient.invalidateQueries(['task']);
       },
     });
   },

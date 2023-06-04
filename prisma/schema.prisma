@@ -19,8 +19,8 @@ model User {
 
 model Todo {
   id        Int       @id @default(autoincrement())
-  title     String? @default("lorem ipsum")
-  content   String? @default("dolor sit amet consectetur adipiscing elit")
+  title     String? @default("No title")
+  content   String?
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
   done      Boolean  @default(false)

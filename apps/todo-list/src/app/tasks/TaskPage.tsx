@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { styled } from 'styled-components';
 
 import { descriptions } from 'common/languages/descriptions';
 import { useRequiredRouteParams } from 'common/hooks';
@@ -8,12 +9,18 @@ import { tasksApiService } from './tasksApiService';
 import { LanguageContext } from '../App';
 import { Button } from './tasksPage/Button';
 import { Input } from './tasksPage/Input';
-import { styled } from 'styled-components';
 
 export const TaskPage = () => {
+  const taskInitialState = {
+    id: '',
+    title: '',
+    content: '',
+    done: false,
+    createdAt: '',
+  };
+
   const [editMode, setEditMode] = useState(false);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [taskBatch, setTaskBatch] = useState(taskInitialState);
 
   const { language } = useContext(LanguageContext);
 
@@ -23,38 +30,32 @@ export const TaskPage = () => {
 
   const updateTask = tasksApiService.useUpdateTask();
 
-  const toggleEditMode = () => setEditMode((editMode) => !editMode);
+  const toggleEditMode = () => {
+    editMode && updateTask.mutate(taskBatch);
+    setEditMode((editMode) => !editMode);
+  };
 
   const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
+    setTaskBatch({
+      ...taskBatch,
+      title: e.target.value,
+    });
   };
 
   const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
+    setTaskBatch({
+      ...taskBatch,
+      content: e.target.value,
+    });
   };
-
-  const defaultTaskTemplate = {
-    id: '',
-    title: '',
-    content: '',
-    done: false,
-    createdAt: '',
-  };
-
-  const inputTask = task || defaultTaskTemplate;
 
   useEffect(() => {
-    if (!editMode) {
-      setTitle(task?.title || '');
-      setContent(task?.content || '');
-    }
-
-    if (editMode) {
-      console.log({
-        // updateTask.mutate({
-        ...inputTask,
-        title: title,
-        content: content,
+    if (!editMode && task) {
+      setTaskBatch({
+        ...taskBatch,
+        id: task.id,
+        title: task?.title || '',
+        content: task?.content || '',
       });
     }
   }, [editMode]);
@@ -67,14 +68,14 @@ export const TaskPage = () => {
           !task ? (
             descriptions[language].taskStatusNotFound
           ) : editMode ? (
-            task.title
-          ) : (
             <Input
-              tiny
+              $tiny
               placeholder="add title"
-              value={title}
+              value={taskBatch.title}
               onChange={onTitleChange}
             />
+          ) : (
+            task.title
           )
         }
         body={
@@ -88,15 +89,15 @@ export const TaskPage = () => {
                 : ''}
             </div>
             {editMode ? (
-              <p>{task?.content}</p>
+              <Textarea value={taskBatch.content} onChange={onContentChange} />
             ) : (
-              <Textarea value={content} onChange={onContentChange} />
+              <p>{task?.content}</p>
             )}
           </TaskContentWrapper>
         }
         extraHeaderContent={
           <Button color="#000" background="#ffb200" onClick={toggleEditMode}>
-            {editMode ? 'Edit' : 'Update'}
+            {editMode ? 'Update' : 'Edit'}
           </Button>
         }
       />
