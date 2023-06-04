@@ -20,7 +20,7 @@ export const AuthorPage = () => {
       <Section
         title="Michał Cesarczyk"
         body={descriptions[language].authorPageContent}
-        extraHeaderContent={<></>}
+        extraHeaderContent={null}
       />
       <GalleryHeader>
         {descriptions[language].authorPageReposHeader}

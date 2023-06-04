@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 import { ReactComponent as LoaderCircle } from 'assets/svg/loaderCircle.svg';
 
 interface SpinnerProps {
@@ -12,8 +14,6 @@ export const Spinner = ({ caption }: SpinnerProps) => (
     </LoaderCircleWrapper>
   </>
 );
-
-import styled from 'styled-components';
 
 export const LoaderCaption = styled.p`
   font-size: 20px;

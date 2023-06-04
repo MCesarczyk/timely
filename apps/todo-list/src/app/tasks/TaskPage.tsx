@@ -62,6 +62,7 @@ export const TaskPage = () => {
       content: task?.content || '',
       done: task?.done || false,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editMode]);
 
   return (
@@ -131,12 +132,4 @@ const TaskContentWrapper = styled.div`
 
 const TextareaWrapper = styled.div`
   padding-top: 24px;
-`;
-
-const Textarea = styled.textarea`
-  border: solid 1px ${({ theme }) => theme.color.borders};
-  padding: 10px;
-  flex-grow: 1;
-  margin: 10px;
-  resize: vertical;
 `;

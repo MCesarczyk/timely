@@ -1,5 +1,6 @@
 import { Repository } from "./types";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isRepoValid = (repo: any): repo is Repository => (
   repo &&
   typeof repo.id === "number" &&
@@ -9,6 +10,7 @@ export const isRepoValid = (repo: any): repo is Repository => (
   typeof repo.html_url === "string"
 );
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isRepoListValid = (repos: any): repos is Repository[] => (
   repos && Array.isArray(repos) && repos.some((repo) => isRepoValid(repo))
 );
