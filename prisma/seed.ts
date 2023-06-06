@@ -22,17 +22,20 @@ async function main() {
   const todos = [
     {
       id: 1,
-      content: 'Check out Prisma with Next.js',
+      title: 'Check out Prisma with Next.js',
+      content: 'lorem ipsum dolor sit amet ...',
       done: false,
     },
     {
       id: 2,
-      content: 'Follow Prisma on Twitter',
+      title: 'Follow Prisma on Twitter',
+      content: 'edisni maet noisufnoc ...',
       done: false,
     },
     {
       id: 3,
-      content: 'Follow Nexus on Twitter',
+      title: 'Follow Nexus on Twitter',
+      content: 'uneviled maet noisufnoc ...',
       done: false,
     },
   ];

@@ -19,6 +19,7 @@ export class TodoController {
   @Post()
   createTodo(@Body() newTodo: Todo): Promise<Todo> {
     return this.todoService.createTodo({
+      title: newTodo.title,
       content: newTodo.content,
       done: newTodo.done
     });

@@ -28,11 +28,10 @@ export const ListButtons = ({
   const updateTask = tasksApiService.useUpdateTask();
 
   const markAllTasksDone = () => {
-    tasks.forEach(({ id }) => {
+    tasks.forEach((task) => {
       updateTask.mutate({
-        id,
+        ...task,
         done: true,
-        content: tasks.find((task) => task.id === id)?.content || '',
       });
     });
   };
