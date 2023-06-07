@@ -19,13 +19,21 @@ model User {
 
 model Todo {
   id        Int       @id @default(autoincrement())
-  title     String? @default("No title")
+  title     String?   @default("No title")
   content   String?
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
-  done      Boolean  @default(false)
+  done      Boolean   @default(false)
   author    User?     @relation(fields: [authorId], references: [id])
   authorId  Int?
+  periods   Period[]
+}
 
-  @@map("Todo")
+model Period {
+  id        Int      @id @default(autoincrement())
+  startTime DateTime @default(now())
+  endTime   DateTime @default(now())
+  type      String   @default("work")
+  todo      Todo?    @relation(fields: [todoId], references: [id])
+  todoId    Int?
 }
