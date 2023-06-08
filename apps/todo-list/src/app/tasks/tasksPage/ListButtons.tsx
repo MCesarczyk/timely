@@ -2,28 +2,21 @@ import { styled } from 'styled-components';
 
 import { descriptions } from 'common/languages/descriptions';
 import { tasksApiService } from 'app/tasks/tasksApiService';
-import { localStorageService } from 'services/localStorageService';
-import { COMPLETED_TASKS_HIDDEN_KEY } from '../constants';
 
 interface FormButtonsProps {
   language: string;
   hideDone: boolean;
-  setHideDone: (value: boolean) => void;
+  toggleHideDone: () => void;
 }
 
 export const ListButtons = ({
   language,
   hideDone,
-  setHideDone,
+  toggleHideDone,
 }: FormButtonsProps) => {
   const { taskList: tasks } = tasksApiService.useGetTasks();
 
   const allDone = tasks.every(({ done }) => done);
-
-  const toggleHideDone = () => {
-    setHideDone(!hideDone);
-    localStorageService.setValue(COMPLETED_TASKS_HIDDEN_KEY, String(hideDone));
-  };
 
   const updateTask = tasksApiService.useUpdateTask();
 
