@@ -31,8 +31,10 @@ export const Form = ({ language }: FormProps) => {
 
     createTask({
       id: Math.random().toString(),
-      content: trimmedContent,
+      title: trimmedContent,
+      content: '',
       done: false,
+      createdAt: new Date().toISOString(),
     });
   };
 
