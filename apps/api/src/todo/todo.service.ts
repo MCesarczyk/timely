@@ -20,6 +20,7 @@ export class TodoService {
 
   public createTodo(
     data: {
+      title: string,
       content: string,
       done: boolean
     }

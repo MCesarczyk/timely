@@ -1,21 +1,27 @@
+import { useContext, useState } from 'react';
+
 import { COMPLETED_TASKS_HIDDEN_KEY } from 'app/tasks/constants';
-import { localStorageService } from 'services/localStorageService';
 import { descriptions } from 'common/languages/descriptions';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
+import { localStorageService } from 'services/localStorageService';
+import { LanguageContext } from 'app/App';
 import { Form } from './Form';
 import { Search } from './Search';
 import { TasksList } from './TasksList';
 import { ListButtons } from './ListButtons';
-import { useContext, useState } from 'react';
-import { LanguageContext } from '~/app/App';
 
 export const TasksPage = () => {
   const { language } = useContext(LanguageContext);
 
-  const [hideDone, setHideDone] = useState(
-    localStorageService.getValue(COMPLETED_TASKS_HIDDEN_KEY, 'false')
+  const [hideDone, setHideDone] = useState<boolean>(
+    localStorageService.getBooleanValue(COMPLETED_TASKS_HIDDEN_KEY, 'false')
   );
+
+  const onHideDoneToggle = () => {
+    setHideDone(!hideDone);
+    localStorageService.setValue(COMPLETED_TASKS_HIDDEN_KEY, String(!hideDone));
+  };
 
   return (
     <main>
@@ -37,7 +43,7 @@ export const TasksPage = () => {
           <ListButtons
             language={language}
             hideDone={hideDone}
-            setHideDone={setHideDone}
+            toggleHideDone={onHideDoneToggle}
           />
         }
       />
