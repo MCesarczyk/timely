@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 
 export const useCurrentDate = (isCounting: boolean = false) => {
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState<number>(Date.now());
 
     useEffect(() => {
-        const clockInterval = setInterval(() => {
-            isCounting && setDate(new Date());
-        }, 1_000);
+        if (isCounting) {
+            setDate(Date.now());
 
-        return () => {
-            clearInterval(clockInterval);
-        };
-    }, []);
+            const clockInterval = setInterval(() => {
+                setDate(Date.now());
+            }, 1_000);
+
+            return () => {
+                clearInterval(clockInterval);
+            };
+        }
+    }, [isCounting]);
 
     return date;
 };

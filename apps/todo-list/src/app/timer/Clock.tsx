@@ -9,15 +9,17 @@ export const Clock = () => {
 
   const date = useCurrentDate(true);
 
+  const time = new Date(date);
+
   return (
     <ClockContainer>
       <ClockElement>
         <ClockLabel>
-          {date.toLocaleString(language, {
+          {time.toLocaleString(language, {
             weekday: 'long',
           })}
         </ClockLabel>
-        {date.toLocaleString(language, {
+        {time.toLocaleString(language, {
           day: 'numeric',
           month: 'long',
           hour: '2-digit',

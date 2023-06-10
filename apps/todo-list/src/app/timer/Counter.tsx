@@ -1,18 +1,24 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useCurrentDate } from './useCurrentDate';
+
 import { buildTimeStringHelper, compileTimeDisplayHelper } from './helpers';
 
 interface CounterProps {
-  isCounting: boolean;
   time: number;
+  isCounting: boolean;
 }
 
-export const Counter = ({ isCounting, time }: CounterProps) => {
-  const date = useCurrentDate(isCounting);
-
+export const Counter = ({ time, isCounting }: CounterProps) => {
+  const [initialDate, setInitialDate] = useState<number>(0);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
   const timezoneOffset = new Date(0).getTimezoneOffset() * 60 * 1000;
 
-  const currentTime: Date = new Date(date.getTime() - time + timezoneOffset);
+  useEffect(() => {
+    !isRunning && isCounting && !initialDate && setInitialDate(Date.now());
+    setIsRunning(isCounting);
+  }, [isCounting]);
+
+  const currentTime: Date = new Date(time + timezoneOffset);
 
   const currentTimeDisplay = compileTimeDisplayHelper(currentTime);
 

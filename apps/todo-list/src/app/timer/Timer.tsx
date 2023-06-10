@@ -1,22 +1,41 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
 import { descriptions } from 'common/languages/descriptions';
 import { Header } from 'common/Header';
 import { Section } from 'common/Section';
 import { LanguageContext } from 'app/App';
-import { Button } from '../tasks/tasksPage/Button';
+import { Button } from 'app/tasks/tasksPage/Button';
+import { tasksApiService } from 'app/tasks/tasksApiService';
 import { Clock } from './Clock';
 import { Counter } from './Counter';
-import { tasksApiService } from '../tasks/tasksApiService';
+import { useCurrentDate } from './useCurrentDate';
 
 export const Timer = () => {
   const { language } = useContext(LanguageContext);
 
   const { taskList: tasks } = tasksApiService.useGetTasks();
 
+  let [timeFrames, setTimeFrames] = useState<number[]>([]);
   const [startMark, setStartMark] = useState<number>(Date.now());
   const [isCounting, setIsCounting] = useState<boolean>(false);
+  const date = useCurrentDate(isCounting);
+
+  const timeframesSum = timeFrames.reduce((a, b) => a + b, 0);
+
+  useEffect(() => {
+    console.log(
+      timeFrames,
+      timeFrames.length,
+      new Date(timeframesSum).toLocaleTimeString()
+    );
+  }, [timeFrames.length]);
+
+  const onButtonClick = () => {
+    setIsCounting((isCounting) => !isCounting);
+    !isCounting && setStartMark(Date.now());
+    isCounting && setTimeFrames([...timeFrames, Date.now() - startMark]);
+  };
 
   return (
     <main>
@@ -25,7 +44,7 @@ export const Timer = () => {
         title={descriptions[language].timerSectionTitle}
         body={
           <CounterWrapper>
-            <Button onClick={() => setStartMark(Date.now())}>Start</Button>
+            <Button onClick={onButtonClick}>Start</Button>
             <Select>
               {tasks
                 .filter(({ done }) => !done)
@@ -33,7 +52,12 @@ export const Timer = () => {
                   <option key={id}>{title}</option>
                 ))}
             </Select>
-            <Counter time={startMark} isCounting={isCounting} />
+            <Counter
+              time={
+                isCounting ? date + timeframesSum - startMark : timeframesSum
+              }
+              isCounting={isCounting}
+            />
           </CounterWrapper>
         }
         extraHeaderContent={<Clock />}
