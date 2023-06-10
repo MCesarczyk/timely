@@ -7,7 +7,7 @@ import { TasksPage } from 'app/tasks/tasksPage/TasksPage';
 import { TaskPage } from 'app/tasks/TaskPage';
 import { AuthorPage } from 'app/author/AuthorPage';
 import { localStorageService } from '~/services/localStorageService';
-import { Timer } from './tasks/tasksPage/Timer';
+import { Timer } from './timer/Timer';
 
 const savedLanguage = localStorageService.getValue('language', 'EN');
 
