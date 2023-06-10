@@ -11,7 +11,7 @@ import {
 import { PeriodService } from './period.service';
 import { Period } from '@prisma/client';
 
-@Controller('period')
+@Controller('periods')
 export class PeriodController {
   constructor(private readonly periodService: PeriodService) {}
 
