@@ -3,3 +3,5 @@ export interface Descriptions {
     [property: string]: string;
   };
 }
+
+export type Language = 'EN' | 'PL';

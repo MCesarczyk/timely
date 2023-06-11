@@ -2,6 +2,8 @@ import { Descriptions } from 'types';
 
 export const descriptions: Descriptions = {
   EN: {
+    // tasks page
+    tasksPageTitle: 'Tasks',
     headerTitle: 'To-do list',
     sectionTitle: 'Add new task',
     tasksSectionTitle: 'List of tasks',
@@ -11,7 +13,7 @@ export const descriptions: Descriptions = {
     toggleButtonInnerTextHidden: 'Show done',
     toggleButtonInnerTextVisible: 'Hide done',
     getExampleTasksButtonText: 'Get example tasks',
-    tasksPageTitle: 'Tasks',
+    // task page
     taskPageTitle: 'Task details',
     taskPageEditButtonText: 'Edit',
     taskPageUpdateButtonText: 'Update',
@@ -23,6 +25,12 @@ export const descriptions: Descriptions = {
     searchSectionTitle: 'Search',
     searchLabelPlaceholder: 'Filter tasks',
     getExampleTasksButtonLoader: 'Loading...',
+    // timer page
+    timerPageTitle: 'Timer',
+    timerSectionTitle: 'Measure your task time',
+    taskSelectPlaceholder: 'Select task',
+    modeSelectPlaceholder: 'Select type',
+    // author page
     authorPageTitle: 'About author',
     authorPageContent:
       "My name is Michał and I'm Typescript-React-based frontend developer. Currently I'm working a lot with geospatial functionalities, maps, remote sensing data. In free time I exercise with Node.js, Prisma, Nest, NX, PostgreSQL and learn about software architecture.",
@@ -34,6 +42,8 @@ export const descriptions: Descriptions = {
     authorPageRepoCodeUrl: 'Repository',
   },
   PL: {
+    // tasks page
+    tasksPageTitle: 'Zadania',
     headerTitle: 'Lista zadań',
     sectionTitle: 'Dodaj nowe zadanie',
     tasksSectionTitle: 'Lista zadań',
@@ -43,7 +53,7 @@ export const descriptions: Descriptions = {
     toggleButtonInnerTextHidden: 'Pokaż ukończone',
     toggleButtonInnerTextVisible: 'Ukryj ukończone',
     getExampleTasksButtonText: 'Pobierz przykładowe zadania',
-    tasksPageTitle: 'Zadania',
+    // task page
     taskPageTitle: 'Szczegóły zadania',
     taskPageEditButtonText: 'Edytuj',
     taskPageUpdateButtonText: 'Zmień',
@@ -55,6 +65,12 @@ export const descriptions: Descriptions = {
     searchSectionTitle: 'Wyszukiwarka',
     searchLabelPlaceholder: 'Filtruj zadania',
     getExampleTasksButtonLoader: 'Ładowanie...',
+    // timer page
+    timerPageTitle: 'Stoper',
+    timerSectionTitle: 'Mierz czas swoich zadań',
+    taskSelectPlaceholder: 'Wybierz zadanie',
+    modeSelectPlaceholder: 'Wybierz rodzaj',
+    // author page
     authorPageTitle: 'O autorze',
     authorPageContent:
       'Mam na imię Michał i jestem frontend developerem opartym na Typescript i React. Obecnie dużo pracuję z funkcjonalnościami geoprzestrzennymi, mapami, danymi z teledetekcji. W wolnym czasie ćwiczę Node.js, Prisma, Nest, NX, PostgreSQL i uczę się o architekturze oprogramowania.',

@@ -2,21 +2,21 @@ import { styled } from 'styled-components';
 import { NavigationLink } from 'common/nav/NavigationLink';
 
 interface NavProps {
-  tasksPath: string;
-  tasksLabel: string;
-  authorPath: string;
-  authorLabel: string;
+  navConfig: {
+    id: number;
+    path: string;
+    label: string;
+  }[];
 }
 
-export const Nav = ({ tasksPath, tasksLabel, authorPath, authorLabel }: NavProps) => (
+export const Nav = ({ navConfig }: NavProps) => (
   <nav>
     <StyledNavList>
-      <li>
-        <NavigationLink path={tasksPath} label={tasksLabel} />
-      </li>
-      <li>
-        <NavigationLink path={authorPath} label={authorLabel} />
-      </li>
+      {navConfig.map((item) => (
+        <li key={item.id}>
+          <NavigationLink path={item.path} label={item.label} />
+        </li>
+      ))}
     </StyledNavList>
   </nav>
 );
