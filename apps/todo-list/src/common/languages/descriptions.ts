@@ -30,6 +30,9 @@ export const descriptions: Descriptions = {
     timerSectionTitle: 'Measure your task time',
     taskSelectPlaceholder: 'Select task',
     modeSelectPlaceholder: 'Select type',
+    // overview page
+    overviewPageTitle: 'Overview',
+    calendarSectionTitle: 'Calendar',
     // author page
     authorPageTitle: 'About author',
     authorPageContent:
@@ -70,6 +73,9 @@ export const descriptions: Descriptions = {
     timerSectionTitle: 'Mierz czas swoich zadań',
     taskSelectPlaceholder: 'Wybierz zadanie',
     modeSelectPlaceholder: 'Wybierz rodzaj',
+    // overview page
+    overviewPageTitle: 'Przegląd',
+    calendarSectionTitle: 'Kalendarz',
     // author page
     authorPageTitle: 'O autorze',
     authorPageContent:

@@ -8,6 +8,7 @@ import { TaskPage } from 'app/tasks/TaskPage';
 import { AuthorPage } from 'app/author/AuthorPage';
 import { localStorageService } from '~/services/localStorageService';
 import { Timer } from './timer/Timer';
+import { Overview } from './overview/Overview';
 
 const savedLanguage = localStorageService.getValue('language', 'EN');
 
@@ -41,6 +42,11 @@ export const App = () => {
             },
             {
               id: 3,
+              path: '/overview',
+              label: descriptions[language].overviewPageTitle,
+            },
+            {
+              id: 4,
               path: '/author',
               label: descriptions[language].authorPageTitle,
             },
@@ -50,6 +56,7 @@ export const App = () => {
           <Route path="/tasks/:id" element={<TaskPage />} />
           <Route path="/tasks" element={<TasksPage />} />
           <Route path="/timer" element={<Timer />} />
+          <Route path="/overview" element={<Overview />} />
           <Route path="/author" element={<AuthorPage />} />
           <Route path="/" element={<Navigate to="/tasks" />} />
         </Routes>
