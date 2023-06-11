@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { restApi } from "./periodsApiAdapter";
-import { isPeriodListValid, isPeriodValid } from "./typeguards";
+import { isPeriodListValid, isPeriodValid } from "domain/periods/typeguards";
 
 export const periodsApiService = {
   useGetPeriods: () => {

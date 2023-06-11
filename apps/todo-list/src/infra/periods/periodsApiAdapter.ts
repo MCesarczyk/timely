@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_URLS } from "./periodsApiUrls";
-import { Period } from "./types";
+import { Period } from "domain/periods/types";
 
 export const restApi = {
   getPeriods: async () => {

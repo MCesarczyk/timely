@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 import { descriptions } from 'common/languages/descriptions';
-import { tasksApiService } from 'app/tasks/tasksApiService';
+import { tasksApiService } from 'infra/tasks/tasksApiService';
 
 interface FormButtonsProps {
   language: string;

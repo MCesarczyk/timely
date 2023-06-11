@@ -2,11 +2,11 @@ import { useContext } from 'react';
 import { styled } from 'styled-components';
 
 import { descriptions } from 'common/languages/descriptions';
-import { Header } from 'common/Header';
-import { Section } from 'common/Section';
+import { Header } from 'components/Header';
+import { Section } from 'components/Section';
 import { Spinner } from 'components/Spinner';
-import { LanguageContext } from '../App';
-import { authorApiService } from './authorApiService';
+import { authorApiService } from 'infra/author/authorApiService';
+import { LanguageContext } from 'app/App';
 import { Tile } from './Tile';
 
 export const AuthorPage = () => {

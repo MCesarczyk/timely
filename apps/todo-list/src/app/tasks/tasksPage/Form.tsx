@@ -1,10 +1,10 @@
 import { FormEvent, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 
-import { Input } from 'app/tasks/tasksPage/Input';
-import { Button } from 'app/tasks/tasksPage/Button';
 import { descriptions } from 'common/languages/descriptions';
-import { tasksApiService } from '../tasksApiService';
+import { tasksApiService } from 'infra/tasks/tasksApiService';
+import { Input } from 'components/Input';
+import { Button } from 'components/Button';
 
 interface FormProps {
   language: string;

@@ -1,12 +1,12 @@
 import { ChangeEvent, useContext } from 'react';
-
 import { styled } from 'styled-components';
+
+import { descriptions } from 'common/languages/descriptions';
 import {
   useQueryParameter,
   useReplaceQueryParameter,
 } from 'app/tasks/tasksPage/queryParameters';
-import { Input } from 'app/tasks/tasksPage/Input';
-import { descriptions } from 'common/languages/descriptions';
+import { Input } from 'components/Input';
 import { SEARCH_QUERY_PARAM_NAME } from './constants';
 import { LanguageContext } from '~/app/App';
 
