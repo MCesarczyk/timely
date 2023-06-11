@@ -28,6 +28,8 @@ export const descriptions: Descriptions = {
     // timer page
     timerPageTitle: 'Timer',
     timerSectionTitle: 'Measure your task time',
+    taskSelectPlaceholder: 'Select task',
+    modeSelectPlaceholder: 'Select type',
     // author page
     authorPageTitle: 'About author',
     authorPageContent:
@@ -66,6 +68,8 @@ export const descriptions: Descriptions = {
     // timer page
     timerPageTitle: 'Stoper',
     timerSectionTitle: 'Mierz czas swoich zadań',
+    taskSelectPlaceholder: 'Wybierz zadanie',
+    modeSelectPlaceholder: 'Wybierz rodzaj',
     // author page
     authorPageTitle: 'O autorze',
     authorPageContent:

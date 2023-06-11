@@ -14,7 +14,9 @@ export const ThumbButton = styled.button<{
     background || (({ theme }) => theme.color.primary)};
   border: none;
   margin: 10px;
-  padding: 0 0 2px 4px;
+  padding: 0;
+  display: grid;
+  place-items: center;
   transition: background 0.5s, transform 1s;
 
   &:hover {

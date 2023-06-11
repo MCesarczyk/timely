@@ -13,6 +13,9 @@ import { periodsApiService } from './periodsApiService';
 import { modes } from './constants';
 import { ThumbButton } from './ThumbButton';
 import { Select } from './Select';
+import { ReactComponent as PlayIcon } from 'assets/svg/playIcon.svg';
+import { ReactComponent as StopIcon } from 'assets/svg/stopIcon.svg';
+import { Language } from '~/types';
 
 export const Timer = () => {
   const { language } = useContext(LanguageContext);
@@ -71,7 +74,9 @@ export const Timer = () => {
           <CounterWrapper>
             <CounterInnerWrapper>
               <Select onChange={onTaskChange}>
-                <option value={0}>choose task &hellip;</option>
+                <option value={0}>
+                  {descriptions[language].taskSelectPlaceholder} &hellip;
+                </option>
                 {tasks
                   .filter(({ done }) => !done)
                   .map(({ id, title }) => (
@@ -79,9 +84,11 @@ export const Timer = () => {
                   ))}
               </Select>
               <Select onChange={onModeChange}>
-                <option value={0}>choose mode &hellip;</option>
-                {modes.map(({ id, name }) => (
-                  <option key={id}>{name}</option>
+                <option value={0}>
+                  {descriptions[language].modeSelectPlaceholder} &hellip;
+                </option>
+                {modes.map(({ id, label }) => (
+                  <option key={id}>{label[language as Language]}</option>
                 ))}
               </Select>
             </CounterInnerWrapper>
@@ -90,7 +97,7 @@ export const Timer = () => {
                 onClick={onButtonClick}
                 disabled={!taskId || !modeId}
               >
-                {'\u25B6'}
+                {isCounting ? <StopIcon /> : <PlayIcon />}
               </ThumbButton>
               <Counter
                 time={
