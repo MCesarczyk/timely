@@ -30,7 +30,7 @@ export const Form = ({ language }: FormProps) => {
     }
 
     createTask({
-      id: Math.random().toString(),
+      id: Math.random(),
       title: trimmedContent,
       content: '',
       done: false,
@@ -57,7 +57,7 @@ export const FormComponent = styled.form`
   padding: 10px;
   display: flex;
 
-  @media (max-width: ${({ theme }) => theme.breakpoint.tabletMax}) {
+  @media (max-width: ${({ theme }) => theme.breakpoint.md}) {
     flex-direction: column;
   }
 `;

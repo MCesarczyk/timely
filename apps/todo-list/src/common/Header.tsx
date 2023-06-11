@@ -1,6 +1,6 @@
 import { Switcher } from 'common/languages/Switcher';
 import { descriptions } from 'common/languages/descriptions';
-import { HeaderWrapper } from 'common/HeaderWrapper';
+import { styled } from 'styled-components';
 
 interface HeaderProps {
   title: string;
@@ -14,3 +14,12 @@ export const Header = ({ title }: HeaderProps) => (
     </HeaderWrapper>
   </header>
 );
+
+export const HeaderWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding-right: 10px;
+  margin: 0 0 1px 0;
+`;

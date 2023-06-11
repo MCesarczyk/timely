@@ -52,7 +52,7 @@ const GalleryHeader = styled.h2`
   font-weight: 900;
   margin-top: 36px;
 
-  @media (max-width: ${({ theme }) => theme.breakpoint.mobileMax}) {
+  @media (max-width: ${({ theme }) => theme.breakpoint.sm}) {
     font-size: 18px;
   }
 `;
@@ -67,17 +67,17 @@ const GalleryWrapper = styled.div`
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 
-  @media (max-width: ${({ theme }) => theme.breakpoint.notebookMax}) {
+  @media (max-width: ${({ theme }) => theme.breakpoint.lg}) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoint.netbookMax}) {
+  @media (max-width: ${({ theme }) => theme.breakpoint.lg}) {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 8px;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoint.mobileMax}) {
+  @media (max-width: ${({ theme }) => theme.breakpoint.sm}) {
     grid-template-columns: minmax(0, 1fr);
     gap: 4px;
   }

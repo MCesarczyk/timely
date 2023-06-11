@@ -1,16 +1,20 @@
 import { styled } from 'styled-components';
 
-export const Button = styled.button<{ color?: string; background?: string }>`
-  display: flex;
-  align-content: center;
-  justify-content: center;
+export const ThumbButton = styled.button<{
+  color?: string;
+  background?: string;
+}>`
+  font-size: 24px;
+  aspect-ratio: 1;
+  min-width: 48px;
+  max-width: 48px;
+  border-radius: 50%;
   color: ${({ color }) => color || (({ theme }) => theme.color.fontLight)};
   background-color: ${({ background }) =>
-  background || (({ theme }) => theme.color.primary)};
+    background || (({ theme }) => theme.color.primary)};
   border: none;
-  padding: 5px;
-  padding: 10px;
   margin: 10px;
+  padding: 0 0 2px 4px;
   transition: background 0.5s, transform 1s;
 
   &:hover {

@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { styled } from 'styled-components';
-import { HeaderWrapper } from 'common/HeaderWrapper';
 
 interface SectionProps {
   title: ReactNode | null;
@@ -12,7 +11,7 @@ export const Section = ({ title, body, extraHeaderContent }: SectionProps) => (
   <SectionContainer>
     <HeaderWrapper>
       <Header>{title}</Header>
-      {extraHeaderContent}
+      <ExtraContentWrapper>{extraHeaderContent}</ExtraContentWrapper>
     </HeaderWrapper>
     {body}
   </SectionContainer>
@@ -29,4 +28,25 @@ export const Header = styled.h2`
   font-weight: 700;
   font-size: 20px;
   margin: 0 0 1px 0;
+`;
+
+export const HeaderWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding-right: 10px;
+  margin: 0 0 1px 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.sm}) {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+`;
+
+const ExtraContentWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 `;

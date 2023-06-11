@@ -52,7 +52,7 @@ export const ButtonsWrapper = styled.div`
   gap: 10px;
   grid-template-columns: auto auto;
 
-  @media (max-width: ${({ theme }) => theme.breakpoint.mobileMax}) {
+  @media (max-width: ${({ theme }) => theme.breakpoint.sm}) {
     grid-template-columns: 1fr;
   }
 `;
