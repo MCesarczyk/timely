@@ -16,6 +16,7 @@ export const Counter = ({ time, isCounting }: CounterProps) => {
   useEffect(() => {
     !isRunning && isCounting && !initialDate && setInitialDate(Date.now());
     setIsRunning(isCounting);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCounting]);
 
   const currentTime: Date = new Date(time + timezoneOffset);

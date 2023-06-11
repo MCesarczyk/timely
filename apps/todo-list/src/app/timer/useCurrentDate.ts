@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useCurrentDate = (isCounting: boolean = false) => {
+export const useCurrentDate = (isCounting = false) => {
     const [date, setDate] = useState<number>(Date.now());
 
     useEffect(() => {
