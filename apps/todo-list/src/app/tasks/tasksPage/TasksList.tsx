@@ -3,7 +3,7 @@ import { css, styled } from 'styled-components';
 
 import { Task } from 'domain/tasks/types';
 import { tasksApiService } from 'infra/tasks/tasksApiService';
-import { SEARCH_QUERY_PARAM_NAME } from './constants';
+import { SEARCH_QUERY_PARAM_NAME } from '../../../services/constants';
 
 interface TasksListProps {
   hideDone: boolean;

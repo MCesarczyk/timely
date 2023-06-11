@@ -1,4 +1,4 @@
-import { Descriptions } from 'types';
+import { Descriptions } from './types';
 
 export const descriptions: Descriptions = {
   EN: {

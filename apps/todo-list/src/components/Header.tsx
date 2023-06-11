@@ -1,5 +1,5 @@
-import { Switcher } from 'common/languages/Switcher';
-import { descriptions } from 'common/languages/descriptions';
+import { Switcher } from 'services/languages/Switcher';
+import { descriptions } from 'services/languages/descriptions';
 import { styled } from 'styled-components';
 
 interface HeaderProps {

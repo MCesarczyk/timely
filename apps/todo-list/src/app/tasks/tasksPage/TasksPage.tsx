@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 
 import { COMPLETED_TASKS_HIDDEN_KEY } from 'domain/tasks/constants';
-import { descriptions } from 'common/languages/descriptions';
+import { descriptions } from 'services/languages/descriptions';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
 import { localStorageService } from 'services/localStorageService';

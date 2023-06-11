@@ -1,14 +1,14 @@
 import { ChangeEvent, useContext } from 'react';
 import { styled } from 'styled-components';
 
-import { descriptions } from 'common/languages/descriptions';
+import { descriptions } from 'services/languages/descriptions';
 import {
   useQueryParameter,
   useReplaceQueryParameter,
-} from 'app/tasks/tasksPage/queryParameters';
+} from 'services/queryParameters';
+import { SEARCH_QUERY_PARAM_NAME } from 'services/constants';
 import { Input } from 'components/Input';
-import { SEARCH_QUERY_PARAM_NAME } from './constants';
-import { LanguageContext } from '~/app/App';
+import { LanguageContext } from 'app/App';
 
 export const Search = () => {
   const { language } = useContext(LanguageContext);

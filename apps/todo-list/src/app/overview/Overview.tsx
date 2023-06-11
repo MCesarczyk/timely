@@ -3,7 +3,7 @@ import ReactCalendar from 'react-calendar';
 import { Value } from 'react-calendar/dist/cjs/shared/types';
 import 'react-calendar/dist/Calendar.css';
 
-import { descriptions } from 'common/languages/descriptions';
+import { descriptions } from 'services/languages/descriptions';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
 import { LanguageContext } from 'app/App';

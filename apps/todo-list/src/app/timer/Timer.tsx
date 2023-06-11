@@ -1,21 +1,21 @@
 import { useContext, useState } from 'react';
 import { styled } from 'styled-components';
 
-import { descriptions } from 'common/languages/descriptions';
-import { Header } from 'components/Header';
-import { Section } from 'components/Section';
 import { modes } from 'domain/periods/constants';
-import { ThumbButton } from 'components/ThumbButton';
-import { Select } from 'components/Select';
 import { tasksApiService } from 'infra/tasks/tasksApiService';
 import { periodsApiService } from 'infra/periods/periodsApiService';
+import { descriptions } from 'services/languages/descriptions';
+import { Language } from 'services/languages/types';
 import { LanguageContext } from 'app/App';
 import { useCurrentDate } from 'app/timer/useCurrentDate';
+import { Header } from 'components/Header';
+import { Section } from 'components/Section';
+import { ThumbButton } from 'components/ThumbButton';
+import { Select } from 'components/Select';
 import { Clock } from './Clock';
 import { Counter } from './Counter';
 import { ReactComponent as PlayIcon } from 'assets/svg/playIcon.svg';
 import { ReactComponent as StopIcon } from 'assets/svg/stopIcon.svg';
-import { Language } from 'types';
 
 export const Timer = () => {
   const { language } = useContext(LanguageContext);

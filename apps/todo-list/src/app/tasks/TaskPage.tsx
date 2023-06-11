@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 
-import { descriptions } from 'common/languages/descriptions';
+import { descriptions } from 'services/languages/descriptions';
 import { useRequiredRouteParams } from 'common/hooks';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';

@@ -1,14 +1,14 @@
 import { createContext, useState } from 'react';
 import { Route, HashRouter, Routes, Navigate } from 'react-router-dom';
 
-import { descriptions } from 'common/languages/descriptions';
-import { Nav } from 'common/nav/Nav';
+import { descriptions } from 'services/languages/descriptions';
+import { localStorageService } from 'services/localStorageService';
+import { Nav } from 'app/Nav';
 import { TasksPage } from 'app/tasks/tasksPage/TasksPage';
 import { TaskPage } from 'app/tasks/TaskPage';
+import { Timer } from 'app/timer/Timer';
+import { Overview } from 'app/overview/Overview';
 import { AuthorPage } from 'app/author/AuthorPage';
-import { localStorageService } from '~/services/localStorageService';
-import { Timer } from './timer/Timer';
-import { Overview } from './overview/Overview';
 
 const savedLanguage = localStorageService.getValue('language', 'EN');
 
