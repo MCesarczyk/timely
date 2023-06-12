@@ -12,6 +12,7 @@ import { Header } from 'components/Header';
 import { Section } from 'components/Section';
 import { ThumbButton } from 'components/ThumbButton';
 import { Select } from 'components/Select';
+import { Spinner, SpinnerWrapper } from 'components/Spinner';
 import { Clock } from './Clock';
 import { Counter } from './Counter';
 import { ReactComponent as PlayIcon } from 'assets/svg/playIcon.svg';
@@ -121,7 +122,9 @@ export const Timer = () => {
         body={
           <>
             {isPeriodsListLoading || isTasksListLoading ? (
-              <p>Loading...</p>
+              <SpinnerWrapper>
+                <Spinner caption="Please wait while results are being loaded..." />
+              </SpinnerWrapper>
             ) : (
               <HistoryList>
                 {periodList
@@ -152,8 +155,11 @@ export const Timer = () => {
                         </div>
                         <div>
                           <TaskListLabel>Time:</TaskListLabel>
-                          {new Date(new Date(endTime).getTime() -
-                            new Date(startTime).getTime() - 60 * 60_000).toLocaleTimeString('PL')}
+                          {new Date(
+                            new Date(endTime).getTime() -
+                              new Date(startTime).getTime() -
+                              60 * 60_000
+                          ).toLocaleTimeString('PL')}
                         </div>
                       </HistoryListItem>
                     );

@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 import { descriptions } from 'services/languages/descriptions';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
-import { Spinner } from 'components/Spinner';
+import { Spinner, SpinnerWrapper } from 'components/Spinner';
 import { authorApiService } from 'infra/author/authorApiService';
 import { LanguageContext } from 'app/App';
 import { Tile } from './Tile';
@@ -55,11 +55,6 @@ const GalleryHeader = styled.h2`
   @media (max-width: ${({ theme }) => theme.breakpoint.sm}) {
     font-size: 18px;
   }
-`;
-
-const SpinnerWrapper = styled.div`
-  display: grid;
-  place-items: center;
 `;
 
 const GalleryWrapper = styled.div`

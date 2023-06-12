@@ -44,3 +44,8 @@ export const SpinnerCircle = styled(LoaderCircle)`
     }
   }
 `;
+
+export const SpinnerWrapper = styled.div`
+display: grid;
+place-items: center;
+`;
