@@ -6,49 +6,22 @@ import { PrismaService } from '../prisma.service';
 export class PeriodService {
   constructor(private prisma: PrismaService) { }
 
-  public getPeriods(perPage = 10, page = 1): Promise<Period[]> {
+  public getPeriods(where: object, perPage: number, page: number): Promise<Period[]> {
     return this.prisma.period.findMany({
       take: Number(perPage),
-      skip: perPage * (Number(page) - 1),
+      skip: perPage * (page - 1),
+      where
     });
   }
 
-  public getPeriodsNumber(): Promise<number> {
-    return this.prisma.period.count();
+  public getPeriodsNumber(where: object): Promise<number> {
+    return this.prisma.period.count({ where });
   }
 
-  public getPeriodById(id: string): Promise<Period> {
+  public getPeriodById(id: number): Promise<Period> {
     return this.prisma.period.findUnique({
       where: {
-        id: Number(id),
-      },
-    });
-  }
-
-  public getPeriodsByTodoId(id: string): Promise<Period[]> {
-    return this.prisma.period.findMany({
-      where: {
-        todoId: Number(id),
-      },
-    });
-  }
-
-  public getPeriodsByType(type: string): Promise<Period[]> {
-    return this.prisma.period.findMany({
-      where: {
-        type: type,
-      },
-    });
-  }
-
-  public getPeriodsByTodoIdAndType(
-    id: string,
-    type: string
-  ): Promise<Period[]> {
-    return this.prisma.period.findMany({
-      where: {
-        todoId: Number(id),
-        type: type,
+        id,
       },
     });
   }

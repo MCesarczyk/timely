@@ -17,33 +17,19 @@ export class PeriodController {
 
   @Get()
   async getPeriods(
-    @Query('perPage') perPage: number,
+    @Query('todoId') todoId: number,
+    @Query('type') type: string,
+    @Query('perPage') perPage = 10,
     @Query('page') page = 1
   ): Promise<{ data: Period[], page: number, total: number }> {
-    const total = await this.periodService.getPeriodsNumber();
-    const data = await this.periodService.getPeriods(perPage, page);
+    const where = { todoId, type };
+    const total = await this.periodService.getPeriodsNumber({ todoId, type });
+    const data = await this.periodService.getPeriods({ todoId, type }, perPage, page);
     return { total, page: Number(page), data };
   }
 
-  @Get('find')
-  async getPeriodsByFilter(
-    @Query('todoId') todoId: string,
-    @Query('type') type: string
-  ): Promise<Period[]> {
-    if (todoId && type) {
-      return this.periodService.getPeriodsByTodoIdAndType(todoId, type);
-    }
-    if (todoId) {
-      return this.periodService.getPeriodsByTodoId(todoId);
-    }
-    if (type) {
-      return this.periodService.getPeriodsByType(type);
-    }
-    return this.periodService.getPeriods();
-  }
-
   @Get(':id')
-  getPeriodById(@Param('id') id: string): Promise<Period> {
+  getPeriodById(@Param('id') id: number): Promise<Period> {
     return this.periodService.getPeriodById(id);
   }
 
