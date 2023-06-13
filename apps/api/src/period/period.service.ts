@@ -4,10 +4,17 @@ import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class PeriodService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
-  public getPeriods(): Promise<Period[]> {
-    return this.prisma.period.findMany();
+  public getPeriods(perPage = 10, page = 1): Promise<Period[]> {
+    return this.prisma.period.findMany({
+      take: Number(perPage),
+      skip: perPage * (Number(page) - 1),
+    });
+  }
+
+  public getPeriodsNumber(): Promise<number> {
+    return this.prisma.period.count();
   }
 
   public getPeriodById(id: string): Promise<Period> {

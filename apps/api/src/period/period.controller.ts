@@ -13,11 +13,16 @@ import { Period } from '@prisma/client';
 
 @Controller('periods')
 export class PeriodController {
-  constructor(private readonly periodService: PeriodService) {}
+  constructor(private readonly periodService: PeriodService) { }
 
   @Get()
-  getPeriods(): Promise<Period[]> {
-    return this.periodService.getPeriods();
+  async getPeriods(
+    @Query('perPage') perPage: number,
+    @Query('page') page = 1
+  ): Promise<{ data: Period[], page: number, total: number }> {
+    const total = await this.periodService.getPeriodsNumber();
+    const data = await this.periodService.getPeriods(perPage, page);
+    return { total, page: Number(page), data };
   }
 
   @Get('find')
