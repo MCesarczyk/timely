@@ -8,6 +8,7 @@ export class PeriodService {
 
   public getPeriods(where: object, perPage: number, page: number): Promise<Period[]> {
     return this.prisma.period.findMany({
+      orderBy: [{ endTime: 'desc' }],
       take: Number(perPage),
       skip: perPage * (page - 1),
       where
