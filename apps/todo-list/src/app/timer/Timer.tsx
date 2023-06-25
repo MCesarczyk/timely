@@ -8,6 +8,7 @@ import { descriptions } from 'services/languages/descriptions';
 import { Language } from 'services/languages/types';
 import { LanguageContext } from 'app/App';
 import { useCurrentDate } from 'app/timer/useCurrentDate';
+import { Navigation } from 'app/timer/Navigation';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
 import { ThumbButton } from 'components/ThumbButton';
@@ -166,6 +167,7 @@ export const Timer = () => {
                   })}
               </HistoryList>
             )}
+            <Navigation />
           </>
         }
       />
