@@ -109,7 +109,7 @@ export const TaskPage = () => {
         }
         extraHeaderContent={
           <>
-            <Button color="#000" background="#ffb200" onClick={toggleEditMode}>
+            <Button color="#000" background="#ffff76" onClick={toggleEditMode}>
               {editMode
                 ? descriptions[language].taskPageUpdateButtonText
                 : descriptions[language].taskPageEditButtonText}
