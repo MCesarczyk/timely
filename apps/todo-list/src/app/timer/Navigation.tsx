@@ -1,12 +1,27 @@
 import { styled } from 'styled-components';
 
-export const Navigation = () => {
+interface NavigationProps {
+  page: number;
+  totalPages: number;
+  setPage: (page: number) => void;
+}
+
+export const Navigation = ({ page, setPage, totalPages }: NavigationProps) => {
+  const goToFirst = () => setPage(1);
+
+  const goToPrevious = () => setPage(page > 1 ? page - 1 : page);
+
+  const goToNext = () => setPage(page < totalPages ? page + 1 : page);
+
+  const goToLast = () => setPage(totalPages);
+
   return (
     <NavigationWrapper>
-      <NavigationButton>{'<<'}</NavigationButton>
-      <NavigationButton>{'<'}</NavigationButton>
-      <NavigationButton>{'>'}</NavigationButton>
-      <NavigationButton>{'>>'}</NavigationButton>
+      <NavigationButton onClick={goToFirst}>{'<<'}</NavigationButton>
+      <NavigationButton onClick={goToPrevious}>{'<'}</NavigationButton>
+      {page} / {totalPages}
+      <NavigationButton onClick={goToNext}>{'>'}</NavigationButton>
+      <NavigationButton onClick={goToLast}>{'>>'}</NavigationButton>
     </NavigationWrapper>
   );
 };

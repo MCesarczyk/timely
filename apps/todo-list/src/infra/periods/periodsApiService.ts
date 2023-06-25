@@ -10,6 +10,7 @@ export const periodsApiService = {
     const { data, isLoading, error } = useQuery(['periods', { perPage, page }], () => restApi.getPeriods(perPage, page));
 
     const periodList = data && isPeriodListValid(data.data) ? data.data : [];
+    const periodListTotal = data && data.total ? data.total : 0;
 
     const getList = (page?: number) => {
       setPage(page);
@@ -18,6 +19,7 @@ export const periodsApiService = {
     return {
       getList,
       periodList,
+      periodListTotal,
       isLoading,
       error,
     };

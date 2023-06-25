@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
 import { modes } from 'domain/periods/constants';
@@ -29,6 +29,7 @@ export const Timer = () => {
   const [timeFrames, setTimeFrames] = useState<number[]>([]);
   const [startMark, setStartMark] = useState<number>(Date.now());
   const [isCounting, setIsCounting] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
   const date = useCurrentDate(isCounting);
 
   const timeframesSum = timeFrames.reduce((a, b) => a + b, 0);
@@ -67,8 +68,20 @@ export const Timer = () => {
     }
   };
 
-  const { periodList, isLoading: isPeriodsListLoading } =
-    periodsApiService.useGetPeriods();
+  const perPage = 10;
+
+  const {
+    periodList,
+    periodListTotal,
+    isLoading: isPeriodsListLoading,
+    getList,
+  } = periodsApiService.useGetPeriods(perPage);
+
+  const totalPages = Math.ceil(periodListTotal / perPage);
+
+  useEffect(() => {
+    getList(page);
+  }, [page]);
 
   const { taskList, isLoading: isTasksListLoading } =
     tasksApiService.useGetTasks();
@@ -167,7 +180,7 @@ export const Timer = () => {
                   })}
               </HistoryList>
             )}
-            <Navigation />
+            <Navigation page={page} totalPages={totalPages} setPage={setPage} />
           </>
         }
       />
