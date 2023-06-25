@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Task } from "app/tasks/types";
-import { API_URLS } from "app/tasks/tasksApiUrls";
+import { Task } from "domain/tasks/types";
+import { API_URLS } from "infra/tasks/tasksApiUrls";
 
 export const restApi = {
   getTasks: async () => {
@@ -22,13 +22,13 @@ export const restApi = {
   },
 
   updateTask: async (task: Task) => {
-    const response = await axios.put(API_URLS.updateTask.replace(':todoId', task.id), task);
+    const response = await axios.put(API_URLS.updateTask.replace(':todoId', String(task.id)), task);
     const updatedTask = await response.data;
     return updatedTask;
   },
 
-  deleteTask: async (id: string) => {
-    const response = await axios.delete(API_URLS.deleteTask.replace(':todoId', id));
+  deleteTask: async (id: number) => {
+    const response = await axios.delete(API_URLS.deleteTask.replace(':todoId', String(id)));
     const deletedTask = await response.data;
     return deletedTask;
   },

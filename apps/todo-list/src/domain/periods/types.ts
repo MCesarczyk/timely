@@ -1,3 +1,5 @@
+import { ApiResponse } from "common/types";
+
 export interface Period {
   id: number;
   startTime: string;
@@ -7,3 +9,7 @@ export interface Period {
 }
 
 export type PeriodList = Period[];
+
+export interface PeriodListApiResponse extends ApiResponse {
+  data: PeriodList;
+}

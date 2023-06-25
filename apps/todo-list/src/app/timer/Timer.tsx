@@ -1,21 +1,22 @@
 import { useContext, useState } from 'react';
 import { styled } from 'styled-components';
 
-import { descriptions } from 'common/languages/descriptions';
-import { Header } from 'common/Header';
-import { Section } from 'common/Section';
+import { modes } from 'domain/periods/constants';
+import { tasksApiService } from 'infra/tasks/tasksApiService';
+import { periodsApiService } from 'infra/periods/periodsApiService';
+import { descriptions } from 'services/languages/descriptions';
+import { Language } from 'services/languages/types';
 import { LanguageContext } from 'app/App';
-import { tasksApiService } from 'app/tasks/tasksApiService';
+import { useCurrentDate } from 'app/timer/useCurrentDate';
+import { Header } from 'components/Header';
+import { Section } from 'components/Section';
+import { ThumbButton } from 'components/ThumbButton';
+import { Select } from 'components/Select';
 import { Clock } from './Clock';
 import { Counter } from './Counter';
-import { useCurrentDate } from './useCurrentDate';
-import { periodsApiService } from './periodsApiService';
-import { modes } from './constants';
-import { ThumbButton } from './ThumbButton';
-import { Select } from './Select';
 import { ReactComponent as PlayIcon } from 'assets/svg/playIcon.svg';
 import { ReactComponent as StopIcon } from 'assets/svg/stopIcon.svg';
-import { Language } from '~/types';
+import { History } from 'app/timer/History';
 
 export const Timer = () => {
   const { language } = useContext(LanguageContext);
@@ -109,6 +110,10 @@ export const Timer = () => {
           </CounterWrapper>
         }
         extraHeaderContent={<Clock />}
+      />
+      <Section
+        title={descriptions[language].timerHistorySectionTitle}
+        body={<History />}
       />
     </main>
   );

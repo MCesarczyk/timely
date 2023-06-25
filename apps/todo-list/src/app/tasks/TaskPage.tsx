@@ -2,18 +2,19 @@ import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 
-import { descriptions } from 'common/languages/descriptions';
+import { descriptions } from 'services/languages/descriptions';
 import { useRequiredRouteParams } from 'common/hooks';
-import { Header } from 'common/Header';
-import { Section } from 'common/Section';
-import { tasksApiService } from './tasksApiService';
-import { LanguageContext } from '../App';
-import { Button } from './tasksPage/Button';
-import { Input } from './tasksPage/Input';
+import { Header } from 'components/Header';
+import { Section } from 'components/Section';
+import { tasksApiService } from 'infra/tasks/tasksApiService';
+import { LanguageContext } from 'app/App';
+import { Button } from 'components/Button';
+import { Input } from 'components/Input';
+import { Task } from 'domain/tasks/types';
 
 export const TaskPage = () => {
-  const taskInitialState = {
-    id: '',
+  const taskInitialState: Task = {
+    id: 0,
     title: '',
     content: '',
     done: false,
@@ -57,7 +58,7 @@ export const TaskPage = () => {
   useEffect(() => {
     setTaskBatch({
       ...taskBatch,
-      id: id,
+      id: Number(id),
       title: task?.title || '',
       content: task?.content || '',
       done: task?.done || false,
@@ -108,7 +109,7 @@ export const TaskPage = () => {
         }
         extraHeaderContent={
           <>
-            <Button color="#000" background="#ffb200" onClick={toggleEditMode}>
+            <Button color="#000" background="#ffff76" onClick={toggleEditMode}>
               {editMode
                 ? descriptions[language].taskPageUpdateButtonText
                 : descriptions[language].taskPageEditButtonText}

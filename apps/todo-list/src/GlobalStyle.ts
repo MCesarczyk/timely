@@ -12,7 +12,7 @@ html {
 
 body {
   background-color: #eee;
-  max-width: 1024px;
+  max-width: 1400px;
   min-width: 320px;
   margin: 0 auto;
   padding: 10px;

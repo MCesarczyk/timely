@@ -1,4 +1,4 @@
-import { Descriptions } from 'types';
+import { Descriptions } from './types';
 
 export const descriptions: Descriptions = {
   EN: {
@@ -30,6 +30,10 @@ export const descriptions: Descriptions = {
     timerSectionTitle: 'Measure your task time',
     taskSelectPlaceholder: 'Select task',
     modeSelectPlaceholder: 'Select type',
+    timerHistorySectionTitle: 'History',
+    // overview page
+    overviewPageTitle: 'Overview',
+    calendarSectionTitle: 'Calendar',
     // author page
     authorPageTitle: 'About author',
     authorPageContent:
@@ -70,6 +74,10 @@ export const descriptions: Descriptions = {
     timerSectionTitle: 'Mierz czas swoich zadań',
     taskSelectPlaceholder: 'Wybierz zadanie',
     modeSelectPlaceholder: 'Wybierz rodzaj',
+    timerHistorySectionTitle: 'Historia',
+    // overview page
+    overviewPageTitle: 'Przegląd',
+    calendarSectionTitle: 'Kalendarz',
     // author page
     authorPageTitle: 'O autorze',
     authorPageContent:

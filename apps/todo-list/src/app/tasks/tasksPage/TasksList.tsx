@@ -1,9 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
 import { css, styled } from 'styled-components';
 
-import { Task } from 'app/tasks/types';
-import { tasksApiService } from 'app/tasks/tasksApiService';
-import { SEARCH_QUERY_PARAM_NAME } from './constants';
+import { Task } from 'domain/tasks/types';
+import { tasksApiService } from 'infra/tasks/tasksApiService';
+import { SEARCH_QUERY_PARAM_NAME } from '../../../services/constants';
 
 interface TasksListProps {
   hideDone: boolean;
@@ -28,7 +28,7 @@ export const TasksList = ({ hideDone }: TasksListProps) => {
 
   const { deleteTask } = tasksApiService.useDeleteTask();
 
-  const removeTask = (id: string) => deleteTask(id);
+  const removeTask = (id: number) => deleteTask(id);
 
   const sortedTasks = tasks.sort((a, b) => Number(a.id) - Number(b.id));
 

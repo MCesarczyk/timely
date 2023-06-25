@@ -1,12 +1,12 @@
 import { PrismaClient } from '@prisma/client'
-// import { seedUser } from './seed.user'
-// import { seedTodo } from './seed.todo';
+import { seedUser } from './seed.user'
+import { seedTodo } from './seed.todo';
 import { seedPeriod } from './seed.period';
 const prisma = new PrismaClient()
 
 async function main() {
-  // seedUser();
-  // seedTodo();
+  seedUser();
+  seedTodo();
   seedPeriod();
 }
 
