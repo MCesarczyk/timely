@@ -13,7 +13,6 @@ export const History = () => {
   const perPage = 10;
   const [page, setPage] = useState<number>(1);
 
-
   const {
     periodList,
     periodListTotal,
@@ -26,7 +25,6 @@ export const History = () => {
   useEffect(() => {
     getList(page);
   }, [page]);
-
 
   const { taskList, isLoading: isTasksListLoading } =
     tasksApiService.useGetTasks();
@@ -55,24 +53,20 @@ export const History = () => {
                       {task?.title}
                     </div>
                     <div>
-                      <TaskListLabel>Type:</TaskListLabel>
-                      {type}
-                    </div>
-                    <div>
-                      <TaskListLabel>From:</TaskListLabel>
-                      {new Date(startTime).toLocaleString(language)}
-                    </div>
-                    <div>
-                      <TaskListLabel>To:</TaskListLabel>
-                      {new Date(endTime).toLocaleString(language)}
-                    </div>
-                    <div>
                       <TaskListLabel>Time:</TaskListLabel>
                       {new Date(
                         new Date(endTime).getTime() -
                           new Date(startTime).getTime() -
                           60 * 60_000
                       ).toLocaleTimeString('PL')}
+                    </div>
+                    <div>
+                      <TaskListLabel>Type:</TaskListLabel>
+                      {type}
+                    </div>
+                    <div>
+                      <TaskListLabel>Ended:</TaskListLabel>
+                      {new Date(endTime).toLocaleString(language)}
                     </div>
                   </HistoryListItem>
                 );
@@ -93,7 +87,7 @@ const HistoryList = styled.ul`
 
 const HistoryListItem = styled.li`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 4fr 2fr 3fr 3fr;
   align-items: center;
   gap: 12px;
   padding: 12px 0;
