@@ -2,19 +2,26 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { restApi } from "./periodsApiAdapter";
 import { isPeriodListValid, isPeriodValid } from "domain/periods/typeguards";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const periodsApiService = {
   useGetPeriods: (perPage?: number) => {
-    const [page, setPage] = useState<number | undefined>();
-    const { data, isLoading, error } = useQuery(['periods', { perPage, page }], () => restApi.getPeriods(perPage, page));
+    const queryClient = useQueryClient();
+    const [page, setPage] = useState<number>(1);
+    const { data, isLoading, error } = useQuery(['periods', { perPage, page }], () => restApi.getPeriods(perPage, page), { keepPreviousData: true });
 
     const periodList = data && isPeriodListValid(data.data) ? data.data : [];
     const periodListTotal = data && data.total ? data.total : 0;
 
     const getList = (page?: number) => {
-      setPage(page);
+      setPage(page as number);
     };
+
+    const nextPage = page + 1;
+
+    useEffect(() => {
+      queryClient.prefetchQuery(['periods', { perPage, nextPage }], () => restApi.getPeriods(perPage, nextPage));
+    }, [page, queryClient]);
 
     return {
       getList,
