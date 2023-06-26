@@ -1,4 +1,4 @@
-import { MouseEvent, useContext, useState } from 'react';
+import { MouseEvent, useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import ReactCalendar from 'react-calendar';
 import { Value } from 'react-calendar/dist/cjs/shared/types';
@@ -13,10 +13,15 @@ import { LanguageContext } from 'app/App';
 export const Overview = () => {
   const { language } = useContext(LanguageContext);
   const [value, setValue] = useState(new Date());
+  const [open, setOpen] = useState(true);
 
   const onDateChange = (value: Value, event: MouseEvent<HTMLButtonElement>) => {
     value && setValue(value as Date);
   };
+
+  useEffect(() => {
+    setOpen(true);
+  }, [value]);
 
   return (
     <main>
@@ -26,8 +31,11 @@ export const Overview = () => {
         body={
           <CalendarWrapper>
             <ReactCalendar onChange={onDateChange} value={value} />
-            <AppModal>
-              <h4>Day details</h4>
+            <AppModal open={open} setOpen={setOpen}>
+              <>
+                <h4>Day details</h4>
+                <p>{value.toLocaleDateString()}</p>
+              </>
             </AppModal>
           </CalendarWrapper>
         }

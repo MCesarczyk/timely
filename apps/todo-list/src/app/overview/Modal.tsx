@@ -1,13 +1,17 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef } from 'react';
 import clsx from 'clsx';
 import Modal from '@mui/base/Modal';
 import styled from 'styled-components';
 
 import { CloseIcon } from './CloseIcon';
 
-export const AppModal = ({ children }: { children: JSX.Element }) => {
-  const [open, setOpen] = useState(true);
+interface AppModalProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  children: JSX.Element;
+}
 
+export const AppModal = ({ open, setOpen, children }: AppModalProps) => {
   const handleClose = () => setOpen(false);
 
   return (
@@ -64,8 +68,8 @@ const StyledBackdrop = styled(Backdrop)`
 
 const StyledModalContainer = styled.div`
   min-width: 600px;
-  border-radius: 10px;
-  padding: 30px;
+  border-radius: 4px;
+  padding: 24px;
   background-color: white;
   box-shadow: 0px 2px 24px #383838;
   position: relative;
