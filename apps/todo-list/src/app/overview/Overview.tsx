@@ -7,6 +7,7 @@ import 'react-calendar/dist/Calendar.css';
 import { descriptions } from 'services/languages/descriptions';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
+import { AppModal } from 'app/overview/Modal';
 import { LanguageContext } from 'app/App';
 
 export const Overview = () => {
@@ -25,6 +26,9 @@ export const Overview = () => {
         body={
           <CalendarWrapper>
             <ReactCalendar onChange={onDateChange} value={value} />
+            <AppModal>
+              <h4>Day details</h4>
+            </AppModal>
           </CalendarWrapper>
         }
       />
