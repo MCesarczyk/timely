@@ -3,7 +3,6 @@ import { Route, HashRouter, Routes, Navigate } from 'react-router-dom';
 
 import { descriptions } from 'services/languages/descriptions';
 import { localStorageService } from 'services/localStorageService';
-import { Nav } from 'app/Nav';
 import { TasksPage } from 'app/tasks/tasksPage/TasksPage';
 import { TaskPage } from 'app/tasks/TaskPage';
 
@@ -25,15 +24,6 @@ export const App = () => {
   return (
     <LanguageContext.Provider value={value}>
       <HashRouter>
-        <Nav
-          navConfig={[
-            {
-              id: 1,
-              path: '/tasks',
-              label: descriptions[language].tasksPageTitle,
-            },
-          ]}
-        />
         <Routes>
           <Route path="/tasks/:id" element={<TaskPage />} />
           <Route path="/tasks" element={<TasksPage />} />

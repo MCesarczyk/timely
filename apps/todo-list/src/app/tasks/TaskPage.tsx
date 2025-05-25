@@ -11,6 +11,7 @@ import { LanguageContext } from 'app/App';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Task } from 'features/tasks/types';
+import { NavigationLink } from 'components/NavigationLink';
 
 export const TaskPage = () => {
   const taskInitialState: Task = {
@@ -84,6 +85,20 @@ export const TaskPage = () => {
             task.title
           )
         }
+        extraHeaderContent={
+          <>
+            <Button color="#000" background="#ffff76" onClick={toggleEditMode}>
+              {editMode
+                ? descriptions[language].taskPageUpdateButtonText
+                : descriptions[language].taskPageEditButtonText}
+            </Button>
+            {editMode && (
+              <Button color="#fff" background="#dc143c" onClick={exitEditMode}>
+                {descriptions[language].taskPageCancelButtonText}
+              </Button>
+            )}
+          </>
+        }
         body={
           <TaskContentWrapper>
             <div>
@@ -105,21 +120,10 @@ export const TaskPage = () => {
                 <MDEditor.Markdown source={task?.content} />
               )}
             </TextareaWrapper>
+            <NavigationLinkWrapper>
+              <NavigationLink label="<< back" path="/tasks" />
+            </NavigationLinkWrapper>
           </TaskContentWrapper>
-        }
-        extraHeaderContent={
-          <>
-            <Button color="#000" background="#ffff76" onClick={toggleEditMode}>
-              {editMode
-                ? descriptions[language].taskPageUpdateButtonText
-                : descriptions[language].taskPageEditButtonText}
-            </Button>
-            {editMode && (
-              <Button color="#fff" background="#dc143c" onClick={exitEditMode}>
-                {descriptions[language].taskPageCancelButtonText}
-              </Button>
-            )}
-          </>
         }
       />
     </main>
@@ -133,4 +137,8 @@ const TaskContentWrapper = styled.div`
 
 const TextareaWrapper = styled.div`
   padding-top: 24px;
+`;
+
+const NavigationLinkWrapper = styled.div`
+  margin-top: 48px;
 `;
