@@ -8,7 +8,6 @@ import { TasksPage } from 'app/tasks/tasksPage/TasksPage';
 import { TaskPage } from 'app/tasks/TaskPage';
 import { Timer } from 'app/timer/Timer';
 import { Overview } from 'app/overview/Overview';
-import { AuthorPage } from 'app/author/AuthorPage';
 
 const savedLanguage = localStorageService.getValue('language', 'EN');
 
@@ -45,11 +44,6 @@ export const App = () => {
               path: '/overview',
               label: descriptions[language].overviewPageTitle,
             },
-            {
-              id: 4,
-              path: '/author',
-              label: descriptions[language].authorPageTitle,
-            },
           ]}
         />
         <Routes>
@@ -57,7 +51,6 @@ export const App = () => {
           <Route path="/tasks" element={<TasksPage />} />
           <Route path="/timer" element={<Timer />} />
           <Route path="/overview" element={<Overview />} />
-          <Route path="/author" element={<AuthorPage />} />
           <Route path="/" element={<Navigate to="/tasks" />} />
         </Routes>
       </HashRouter>
