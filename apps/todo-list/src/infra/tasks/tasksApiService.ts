@@ -4,7 +4,7 @@ import { isTaskListValid, isTaskValid } from "domain/tasks/typeguards";
 
 export const tasksApiService = {
   useGetTasks: () => {
-    const { data, isLoading, error } = useQuery(['tasks'], () => restApi.getTasks());
+    const { data, isLoading, error } = useQuery({ queryKey: ['tasks'], queryFn: () => restApi.getTasks() });
 
     const taskList = isTaskListValid(data) ? data : [];
 
@@ -16,7 +16,7 @@ export const tasksApiService = {
   },
 
   useGetTask: (id: string) => {
-    const { data, isLoading, error } = useQuery(['task', { id }], () => restApi.getTask(id));
+    const { data, isLoading, error } = useQuery({ queryKey: ['task', { id }], queryFn: () => restApi.getTask(id) });
 
     const task = isTaskValid(data) ? data : null;
 
@@ -30,15 +30,16 @@ export const tasksApiService = {
   useCreateTask: () => {
     const queryClient = useQueryClient();
 
-    const { mutate: createTask, isLoading, isSuccess } = useMutation(restApi.createTask, {
+    const { mutate: createTask, isPending, isSuccess } = useMutation({
+      mutationFn: restApi.createTask,
       onSuccess: () => {
-        queryClient.invalidateQueries(['tasks']);
+        queryClient.invalidateQueries({ queryKey: ['tasks'] });
       },
     });
 
     return {
       createTask,
-      isLoading,
+      isPending,
       isSuccess,
     };
   },
@@ -46,10 +47,11 @@ export const tasksApiService = {
   useUpdateTask: () => {
     const queryClient = useQueryClient();
 
-    return useMutation(restApi.updateTask, {
+    return useMutation({
+      mutationFn: restApi.updateTask,
       onSuccess: () => {
-        queryClient.invalidateQueries(['tasks']);
-        queryClient.invalidateQueries(['task']);
+        queryClient.invalidateQueries({ queryKey: ['tasks'] });
+        queryClient.invalidateQueries({ queryKey: ['task'] });
       },
     });
   },
@@ -57,15 +59,16 @@ export const tasksApiService = {
   useDeleteTask: () => {
     const queryClient = useQueryClient();
 
-    const { mutate: deleteTask, isLoading, isSuccess } = useMutation(restApi.deleteTask, {
+    const { mutate: deleteTask, isPending, isSuccess } = useMutation({
+      mutationFn: restApi.deleteTask,
       onSuccess: () => {
-        queryClient.invalidateQueries(['tasks']);
+        queryClient.invalidateQueries({ queryKey: ['tasks'] });
       },
     });
 
     return {
       deleteTask,
-      isLoading,
+      isPending,
       isSuccess,
     };
   }

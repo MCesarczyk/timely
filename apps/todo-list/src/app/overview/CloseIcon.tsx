@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-
-import { ReactComponent as CrossIcon } from './cross-icon.svg';
+import { DefaultTheme } from 'styled-components';
+import { CrossIcon } from 'app/overview/CrossIcon';
 
 export const CloseIcon = styled(CrossIcon)`
   position: absolute;
@@ -10,7 +10,6 @@ export const CloseIcon = styled(CrossIcon)`
   height: 16px;
   cursor: pointer;
 
-  path {
-    stroke: ${({ theme }) => theme.color.suvaGray};
-  }
+  stroke: ${({ theme }) =>
+    (theme as DefaultTheme & { color: { suvaGray: string } }).color.suvaGray};
 `;

@@ -13,9 +13,8 @@ import { DEFAULT_CACHE_TIME, DEFAULT_STALE_TIME } from 'common/constants';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      keepPreviousData: true,
       staleTime: DEFAULT_STALE_TIME,
-      cacheTime: DEFAULT_CACHE_TIME,
+      gcTime: DEFAULT_CACHE_TIME,
     },
   },
 });

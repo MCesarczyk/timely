@@ -8,7 +8,7 @@ export const periodsApiService = {
   useGetPeriods: (perPage?: number) => {
     const queryClient = useQueryClient();
     const [page, setPage] = useState<number>(1);
-    const { data, isLoading, error } = useQuery(['periods', { perPage, page }], () => restApi.getPeriods(perPage, page), { keepPreviousData: true });
+    const { data, isLoading, error } = useQuery({ queryKey: ['periods', { perPage, page }], queryFn: () => restApi.getPeriods(perPage, page) });
 
     const periodList = data && isPeriodListValid(data.data) ? data.data : [];
     const periodListTotal = data && data.total ? data.total : 0;
@@ -20,7 +20,7 @@ export const periodsApiService = {
     const nextPage = page + 1;
 
     useEffect(() => {
-      queryClient.prefetchQuery(['periods', { perPage, nextPage }], () => restApi.getPeriods(perPage, nextPage));
+      queryClient.prefetchQuery({ queryKey: ['periods', { perPage, nextPage }], queryFn: () => restApi.getPeriods(perPage, nextPage) });
     }, [page, queryClient]);
 
     return {
@@ -33,7 +33,7 @@ export const periodsApiService = {
   },
 
   useGetPeriod: (id: string) => {
-    const { data, isLoading, error } = useQuery(['period', { id }], () => restApi.getPeriod(id));
+    const { data, isLoading, error } = useQuery({ queryKey: ['period', { id }], queryFn: () => restApi.getPeriod(id) });
 
     const period = isPeriodValid(data) ? data : null;
 
@@ -47,15 +47,15 @@ export const periodsApiService = {
   useCreatePeriod: () => {
     const queryClient = useQueryClient();
 
-    const { mutate: createPeriod, isLoading, isSuccess } = useMutation(restApi.createPeriod, {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['periods']);
+    const { mutate: createPeriod, isPending, isSuccess } = useMutation({
+      mutationFn: restApi.createPeriod, onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['periods'] });
       },
     });
 
     return {
       createPeriod,
-      isLoading,
+      isPending,
       isSuccess,
     };
   },
@@ -63,10 +63,11 @@ export const periodsApiService = {
   useUpdatePeriod: () => {
     const queryClient = useQueryClient();
 
-    return useMutation(restApi.updatePeriod, {
+    return useMutation({
+      mutationFn: restApi.updatePeriod,
       onSuccess: () => {
-        queryClient.invalidateQueries(['periods']);
-        queryClient.invalidateQueries(['period']);
+        queryClient.invalidateQueries({ queryKey: ['periods'] });
+        queryClient.invalidateQueries({ queryKey: ['period'] });
       },
     });
   },
@@ -74,15 +75,16 @@ export const periodsApiService = {
   useDeletePeriod: () => {
     const queryClient = useQueryClient();
 
-    const { mutate: deletePeriod, isLoading, isSuccess } = useMutation(restApi.deletePeriod, {
+    const { mutate: deletePeriod, isPending, isSuccess } = useMutation({
+      mutationFn: restApi.deletePeriod,
       onSuccess: () => {
-        queryClient.invalidateQueries(['periods']);
+        queryClient.invalidateQueries({ queryKey: ['periods'] });
       },
     });
 
     return {
       deletePeriod,
-      isLoading,
+      isPending,
       isSuccess,
     };
   }

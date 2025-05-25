@@ -14,9 +14,9 @@ import { ThumbButton } from 'components/ThumbButton';
 import { Select } from 'components/Select';
 import { Clock } from './Clock';
 import { Counter } from './Counter';
-import { ReactComponent as PlayIcon } from 'assets/svg/playIcon.svg';
-import { ReactComponent as StopIcon } from 'assets/svg/stopIcon.svg';
 import { History } from 'app/timer/History';
+import { PlayIcon } from 'app/timer/PlayIcon';
+import { StopIcon } from 'app/timer/StopIcon';
 
 export const Timer = () => {
   const { language } = useContext(LanguageContext);

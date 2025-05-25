@@ -5,7 +5,7 @@ import { isRepoListValid } from "domain/author/typeguards";
 
 export const authorApiService = {
   useGetAuthorRepos: () => {
-    const { data, isLoading, error } = useQuery(['author'], restApi.getRepos);
+    const { data, isLoading, error } = useQuery({ queryKey: ['author'], queryFn: restApi.getRepos });
 
     const reposList = isRepoListValid(data) ? data : [];
 
