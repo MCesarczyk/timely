@@ -6,9 +6,6 @@ import { localStorageService } from 'services/localStorageService';
 import { Nav } from 'app/Nav';
 import { TasksPage } from 'app/tasks/tasksPage/TasksPage';
 import { TaskPage } from 'app/tasks/TaskPage';
-import { Timer } from 'app/timer/Timer';
-import { Overview } from 'app/overview/Overview';
-import { AuthorPage } from 'app/author/AuthorPage';
 
 const savedLanguage = localStorageService.getValue('language', 'EN');
 
@@ -35,30 +32,13 @@ export const App = () => {
               path: '/tasks',
               label: descriptions[language].tasksPageTitle,
             },
-            {
-              id: 2,
-              path: '/timer',
-              label: descriptions[language].timerPageTitle,
-            },
-            {
-              id: 3,
-              path: '/overview',
-              label: descriptions[language].overviewPageTitle,
-            },
-            {
-              id: 4,
-              path: '/author',
-              label: descriptions[language].authorPageTitle,
-            },
           ]}
         />
         <Routes>
           <Route path="/tasks/:id" element={<TaskPage />} />
           <Route path="/tasks" element={<TasksPage />} />
-          <Route path="/timer" element={<Timer />} />
-          <Route path="/overview" element={<Overview />} />
-          <Route path="/author" element={<AuthorPage />} />
           <Route path="/" element={<Navigate to="/tasks" />} />
+          <Route path="*" element={<Navigate to="/tasks" />} />
         </Routes>
       </HashRouter>
     </LanguageContext.Provider>
