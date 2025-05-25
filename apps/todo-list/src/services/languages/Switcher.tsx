@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { styled } from 'styled-components';
 
-import { Descriptions } from 'types';
 import { LanguageContext } from 'app/App';
-import { localStorageService } from '~/services/localStorageService';
+import { localStorageService } from '../localStorageService';
+import { Descriptions } from './types';
 
 interface SwitcherProps {
   descriptions: Descriptions;

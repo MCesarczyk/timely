@@ -1,7 +1,7 @@
 export const localStorageService = {
   getValue: (reference: string, fallback?: string | object): string => {
     const localStorageValue = localStorage.getItem(reference);
-    return localStorageValue ? JSON.parse(localStorageValue) : fallback;
+    return (localStorageValue ? JSON.parse(localStorageValue) : fallback) || '';
   },
 
   getBooleanValue: (reference: string, fallback?: string): boolean => {

@@ -6,11 +6,11 @@ import { descriptions } from 'services/languages/descriptions';
 import { useRequiredRouteParams } from 'common/hooks';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
-import { tasksApiService } from 'infra/tasks/tasksApiService';
+import { tasksApiService } from 'features/tasks/tasksApiService';
 import { LanguageContext } from 'app/App';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
-import { Task } from 'domain/tasks/types';
+import { Task } from 'features/tasks/types';
 
 export const TaskPage = () => {
   const taskInitialState: Task = {

@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 
 export const useRequiredRouteParams = <TRequiredRouteParam extends string>(param: TRequiredRouteParam) => {
   const { [param]: value } = useParams<Record<TRequiredRouteParam, string>>();

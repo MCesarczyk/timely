@@ -1,4 +1,19 @@
 import { createGlobalStyle } from 'styled-components';
+import 'styled-components';
+
+declare module 'styled-components' {
+  export interface DefaultTheme {
+    color: {
+      [key: string]: string;
+    };
+    breakpoint: {
+      [key: string]: string;
+    };
+    border: string;
+    shadow: string;
+  }
+}
+
 
 export const GlobalStyle = createGlobalStyle`
 

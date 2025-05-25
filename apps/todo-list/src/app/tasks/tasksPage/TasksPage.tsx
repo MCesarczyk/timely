@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 
-import { COMPLETED_TASKS_HIDDEN_KEY } from 'domain/tasks/constants';
+import { COMPLETED_TASKS_HIDDEN_KEY } from 'features/tasks/constants';
 import { descriptions } from 'services/languages/descriptions';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
