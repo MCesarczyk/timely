@@ -8,7 +8,9 @@ declare module 'styled-components' {
     };
     breakpoint: {
       [key: string]: string;
-    }
+    };
+    border: string;
+    shadow: string;
   }
 }
 
