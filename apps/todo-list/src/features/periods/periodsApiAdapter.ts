@@ -1,6 +1,7 @@
 import axios from "axios";
+
 import { API_URLS } from "./periodsApiUrls";
-import { Period, PeriodListApiResponse } from "domain/periods/types";
+import { Period, PeriodListApiResponse } from "./types";
 
 export const restApi = {
   getPeriods: async (perPage?: number, page?: number): Promise<PeriodListApiResponse> => {

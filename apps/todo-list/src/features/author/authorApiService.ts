@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { restApi } from "./authorApiAdapter";
-import { isRepoListValid } from "domain/author/typeguards";
+import { isRepoListValid } from "./typeguards";
 
 export const authorApiService = {
   useGetAuthorRepos: () => {

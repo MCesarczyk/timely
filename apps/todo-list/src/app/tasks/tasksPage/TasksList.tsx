@@ -1,8 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 import { css, styled } from 'styled-components';
 
-import { Task } from 'domain/tasks/types';
-import { tasksApiService } from 'infra/tasks/tasksApiService';
+import { Task } from 'features/tasks/types';
+import { tasksApiService } from 'features/tasks/tasksApiService';
 import { SEARCH_QUERY_PARAM_NAME } from '../../../services/constants';
 
 interface TasksListProps {

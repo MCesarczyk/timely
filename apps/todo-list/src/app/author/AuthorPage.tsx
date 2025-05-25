@@ -5,7 +5,7 @@ import { descriptions } from 'services/languages/descriptions';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
 import { Spinner, SpinnerWrapper } from 'components/Spinner';
-import { authorApiService } from 'infra/author/authorApiService';
+import { authorApiService } from 'features/author/authorApiService';
 import { LanguageContext } from 'app/App';
 import { Tile } from './Tile';
 

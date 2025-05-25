@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
-import { tasksApiService } from 'infra/tasks/tasksApiService';
-import { periodsApiService } from 'infra/periods/periodsApiService';
+import { tasksApiService } from 'features/tasks/tasksApiService';
+import { periodsApiService } from 'features/periods/periodsApiService';
 import { LanguageContext } from 'app/App';
 import { Spinner, SpinnerWrapper } from 'components/Spinner';
 import { Navigation } from 'app/timer/Navigation';

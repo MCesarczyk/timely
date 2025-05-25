@@ -2,7 +2,7 @@ import { FormEvent, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 
 import { descriptions } from 'services/languages/descriptions';
-import { tasksApiService } from 'infra/tasks/tasksApiService';
+import { tasksApiService } from 'features/tasks/tasksApiService';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 

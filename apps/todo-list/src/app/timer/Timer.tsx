@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
 import { styled } from 'styled-components';
 
-import { modes } from 'domain/periods/constants';
-import { tasksApiService } from 'infra/tasks/tasksApiService';
-import { periodsApiService } from 'infra/periods/periodsApiService';
+import { modes } from 'features/periods/constants';
+import { tasksApiService } from 'features/tasks/tasksApiService';
+import { periodsApiService } from 'features/periods/periodsApiService';
 import { descriptions } from 'services/languages/descriptions';
 import { Language } from 'services/languages/types';
 import { LanguageContext } from 'app/App';
