@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { styled } from 'styled-components';
 
-import { modes } from '../features/periods/constants';
-import { tasksApiService } from '../features/tasks/tasksApiService';
-import { periodsApiService } from '../features/periods/periodsApiService';
+import { modes } from '../periods/constants';
+import { tasksApiService } from '../tasks/tasksApiService';
+import { periodsApiService } from '../periods/periodsApiService';
 import { useCurrentDate } from './useCurrentDate';
 import { Header } from '../components/Header';
 import { Section } from '../components/Section';
