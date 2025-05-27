@@ -2,12 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 
-import { descriptions } from 'services/languages/descriptions';
 import { useRequiredRouteParams } from 'common/hooks';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
 import { tasksApiService } from 'features/tasks/tasksApiService';
-import { LanguageContext } from 'app/App';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Task } from 'features/tasks/types';
@@ -24,8 +22,6 @@ export const TaskPage = () => {
 
   const [editMode, setEditMode] = useState(false);
   const [taskBatch, setTaskBatch] = useState(taskInitialState);
-
-  const { language } = useContext(LanguageContext);
 
   const id = useRequiredRouteParams('id');
 
@@ -69,11 +65,11 @@ export const TaskPage = () => {
 
   return (
     <main>
-      <Header title={descriptions[language].taskPageTitle} />
+      <Header title="Task details" />
       <Section
         title={
           !task ? (
-            descriptions[language].taskStatusNotFound
+            'Task not found'
           ) : editMode ? (
             <Input
               $tiny
@@ -89,12 +85,12 @@ export const TaskPage = () => {
           <>
             <Button color="#000" background="#ffff76" onClick={toggleEditMode}>
               {editMode
-                ? descriptions[language].taskPageUpdateButtonText
-                : descriptions[language].taskPageEditButtonText}
+                ? 'Update Task'
+                : 'Edit Task'}
             </Button>
             {editMode && (
               <Button color="#fff" background="#dc143c" onClick={exitEditMode}>
-                {descriptions[language].taskPageCancelButtonText}
+                {'Cancel'}
               </Button>
             )}
           </>
@@ -102,11 +98,11 @@ export const TaskPage = () => {
         body={
           <TaskContentWrapper>
             <div>
-              <strong>{task && descriptions[language].taskStatusLabel}</strong>
+              <strong>{task && 'Status: '}</strong>
               {task
                 ? task.done
-                  ? descriptions[language].taskStatusDone
-                  : descriptions[language].taskStatusUndone
+                  ? 'Completed'
+                  : 'Not completed'
                 : ''}
             </div>
             <TextareaWrapper data-color-mode="light">
@@ -121,7 +117,7 @@ export const TaskPage = () => {
               )}
             </TextareaWrapper>
             <NavigationLinkWrapper>
-              <NavigationLink label="<< back" path="/tasks" />
+              <NavigationLink label="<<" path="/tasks" />
             </NavigationLinkWrapper>
           </TaskContentWrapper>
         }

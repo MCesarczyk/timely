@@ -1,19 +1,13 @@
 import { styled } from 'styled-components';
 
-import { descriptions } from 'services/languages/descriptions';
 import { tasksApiService } from 'features/tasks/tasksApiService';
 
 interface FormButtonsProps {
-  language: string;
   hideDone: boolean;
   toggleHideDone: () => void;
 }
 
-export const ListButtons = ({
-  language,
-  hideDone,
-  toggleHideDone,
-}: FormButtonsProps) => {
+export const ListButtons = ({ hideDone, toggleHideDone }: FormButtonsProps) => {
   const { taskList: tasks } = tasksApiService.useGetTasks();
 
   const allDone = tasks.every(({ done }) => done);
@@ -35,11 +29,11 @@ export const ListButtons = ({
         <>
           <Button onClick={toggleHideDone}>
             {hideDone
-              ? descriptions[language].toggleButtonInnerTextHidden
-              : descriptions[language].toggleButtonInnerTextVisible}
+              ? 'Show completed tasks'
+              : 'Hide completed tasks'}
           </Button>
           <Button onClick={markAllTasksDone} disabled={allDone}>
-            {descriptions[language].setDoneButtonInnerText}
+            {'Mark all as done'}
           </Button>
         </>
       )}

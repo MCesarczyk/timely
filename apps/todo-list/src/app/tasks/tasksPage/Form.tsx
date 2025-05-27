@@ -1,16 +1,11 @@
 import { FormEvent, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 
-import { descriptions } from 'services/languages/descriptions';
 import { tasksApiService } from 'features/tasks/tasksApiService';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 
-interface FormProps {
-  language: string;
-}
-
-export const Form = ({ language }: FormProps) => {
+export const Form = () => {
   const [newTaskContent, setNewTaskContent] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -43,11 +38,11 @@ export const Form = ({ language }: FormProps) => {
       <Input
         ref={inputRef}
         value={newTaskContent}
-        placeholder={descriptions[language].inputPlaceholder}
+        placeholder='What are you going to do?'
         onChange={({ target }) => setNewTaskContent(target.value)}
         autoFocus
       />
-      <Button>{descriptions[language].formButtonInnerText}</Button>
+      <Button>Create Task</Button>
     </FormComponent>
   );
 };
