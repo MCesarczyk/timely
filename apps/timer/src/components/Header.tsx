@@ -1,5 +1,3 @@
-import { Switcher } from '../services/languages/Switcher';
-import { descriptions } from '../services/languages/descriptions';
 import { styled } from 'styled-components';
 
 interface HeaderProps {
@@ -10,7 +8,6 @@ export const Header = ({ title }: HeaderProps) => (
   <header>
     <HeaderWrapper>
       <h1>{title}</h1>
-      <Switcher descriptions={descriptions} />
     </HeaderWrapper>
   </header>
 );

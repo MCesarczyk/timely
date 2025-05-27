@@ -2,57 +2,36 @@ export const modes = [
   {
     id: 1,
     name: "work",
-    label: {
-      EN: "work",
-      PL: "praca",
-    }
+    label: "work",
   },
   {
     id: 2,
     name: "side work",
-    label: {
-      EN: "side work",
-      PL: "praca dodatkowa",
-    }
+    label: "side work",
   },
   {
     id: 3,
     name: "project management",
-    label: {
-      EN: "project management",
-      PL: "zarządzanie projektem",
-    }
+    label: "project management",
   },
   {
     id: 4,
     name: "meeting",
-    label: {
-      EN: "meeting",
-      PL: "spotkanie",
-    }
+    label: "meeting",
   },
   {
     id: 5,
     name: "lunch break",
-    label: {
-      EN: "lunch break",
-      PL: "przerwa obiadowa",
-    }
+    label: "lunch break",
   },
   {
     id: 6,
     name: "break",
-    label: {
-      EN: "break",
-      PL: "przerwa",
-    }
+    label: "break",
   },
   {
     id: 7,
     name: "other",
-    label: {
-      EN: "other",
-      PL: "inne",
-    }
+    label: "other",
   },
 ];
