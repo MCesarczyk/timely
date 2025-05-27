@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule],
   selector: 'app-root',
-  template: 'Records <router-outlet></router-outlet>',
+  template: '<h1 class="text-4xl text-red-800 font-bold m-4">Records <router-outlet></router-outlet>',
 })
 export class AppComponent {
   title = 'records';
