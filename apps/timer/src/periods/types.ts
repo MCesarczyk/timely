@@ -1,4 +1,4 @@
-import { ApiResponse } from "../../common/types";
+import { ApiResponse } from "../common/types";
 
 export interface Period {
   id: number;

@@ -4,7 +4,8 @@
   "proxy": "http://localhost:4000",
   "license": "MIT",
   "scripts": {
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "serve:all": "nx run-many --target=serve --all"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed/seed.ts"

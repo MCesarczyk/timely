@@ -1,19 +1,15 @@
 import { useContext, useState } from 'react';
 
-import { COMPLETED_TASKS_HIDDEN_KEY } from 'features/tasks/constants';
-import { descriptions } from 'services/languages/descriptions';
+import { COMPLETED_TASKS_HIDDEN_KEY } from '~/tasks/constants';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
-import { localStorageService } from 'services/localStorageService';
-import { LanguageContext } from 'app/App';
+import { localStorageService } from '~/common/localStorageService';
 import { Form } from './Form';
 import { Search } from './Search';
 import { TasksList } from './TasksList';
 import { ListButtons } from './ListButtons';
 
 export const TasksPage = () => {
-  const { language } = useContext(LanguageContext);
-
   const [hideDone, setHideDone] = useState<boolean>(
     localStorageService.getBooleanValue(COMPLETED_TASKS_HIDDEN_KEY, 'false')
   );
@@ -25,23 +21,22 @@ export const TasksPage = () => {
 
   return (
     <main>
-      <Header title={descriptions[language].headerTitle} />
+      <Header title="Tasks" />
       <Section
-        title={descriptions[language].sectionTitle}
-        body={<Form language={language} />}
+        title="Create a new task"
+        body={<Form />}
         extraHeaderContent={null}
       />
       <Section
-        title={descriptions[language].searchSectionTitle}
+        title="Search tasks"
         body={<Search />}
         extraHeaderContent={null}
       />
       <Section
-        title={descriptions[language].tasksSectionTitle}
+        title="List of tasks"
         body={<TasksList hideDone={hideDone} />}
         extraHeaderContent={
           <ListButtons
-            language={language}
             hideDone={hideDone}
             toggleHideDone={onHideDoneToggle}
           />

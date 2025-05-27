@@ -1,15 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
-import { tasksApiService } from '../features/tasks/tasksApiService';
-import { periodsApiService } from '../features/periods/periodsApiService';
-import { LanguageContext } from './App';
+import { tasksApiService } from '../tasks/tasksApiService';
+import { periodsApiService } from '../periods/periodsApiService';
 import { Spinner, SpinnerWrapper } from '../components/Spinner';
 import { Navigation } from './Navigation';
 
 export const History = () => {
-  const { language } = useContext(LanguageContext);
-
   const perPage = 10;
   const [page, setPage] = useState<number>(1);
 
@@ -66,7 +63,7 @@ export const History = () => {
                     </div>
                     <div>
                       <TaskListLabel>Ended:</TaskListLabel>
-                      {new Date(endTime).toLocaleString(language)}
+                      {new Date(endTime).toLocaleString("EN")}
                     </div>
                   </HistoryListItem>
                 );

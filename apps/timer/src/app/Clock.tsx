@@ -1,12 +1,8 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { LanguageContext } from './App';
 import { useCurrentDate } from './useCurrentDate';
 
 export const Clock = () => {
-  const { language } = useContext(LanguageContext);
-
   const date = useCurrentDate(true);
 
   const time = new Date(date);
@@ -15,11 +11,11 @@ export const Clock = () => {
     <ClockContainer>
       <ClockElement>
         <ClockLabel>
-          {time.toLocaleString(language, {
+          {time.toLocaleString("EN", {
             weekday: 'long',
           })}
         </ClockLabel>
-        {time.toLocaleString(language, {
+        {time.toLocaleString("EN", {
           day: 'numeric',
           month: 'long',
           hour: '2-digit',

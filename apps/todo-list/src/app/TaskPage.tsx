@@ -2,15 +2,14 @@ import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 
-import { descriptions } from 'services/languages/descriptions';
 import { useRequiredRouteParams } from 'common/hooks';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
-import { tasksApiService } from 'features/tasks/tasksApiService';
-import { LanguageContext } from 'app/App';
+import { tasksApiService } from '~/tasks/tasksApiService';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
-import { Task } from 'features/tasks/types';
+import { Task } from '~/tasks/types';
+import { NavigationLink } from 'components/NavigationLink';
 
 export const TaskPage = () => {
   const taskInitialState: Task = {
@@ -23,8 +22,6 @@ export const TaskPage = () => {
 
   const [editMode, setEditMode] = useState(false);
   const [taskBatch, setTaskBatch] = useState(taskInitialState);
-
-  const { language } = useContext(LanguageContext);
 
   const id = useRequiredRouteParams('id');
 
@@ -68,11 +65,11 @@ export const TaskPage = () => {
 
   return (
     <main>
-      <Header title={descriptions[language].taskPageTitle} />
+      <Header title="Task details" />
       <Section
         title={
           !task ? (
-            descriptions[language].taskStatusNotFound
+            'Task not found'
           ) : editMode ? (
             <Input
               $tiny
@@ -84,14 +81,28 @@ export const TaskPage = () => {
             task.title
           )
         }
+        extraHeaderContent={
+          <>
+            <Button color="#000" background="#ffff76" onClick={toggleEditMode}>
+              {editMode
+                ? 'Update Task'
+                : 'Edit Task'}
+            </Button>
+            {editMode && (
+              <Button color="#fff" background="#dc143c" onClick={exitEditMode}>
+                {'Cancel'}
+              </Button>
+            )}
+          </>
+        }
         body={
           <TaskContentWrapper>
             <div>
-              <strong>{task && descriptions[language].taskStatusLabel}</strong>
+              <strong>{task && 'Status: '}</strong>
               {task
                 ? task.done
-                  ? descriptions[language].taskStatusDone
-                  : descriptions[language].taskStatusUndone
+                  ? 'Completed'
+                  : 'Not completed'
                 : ''}
             </div>
             <TextareaWrapper data-color-mode="light">
@@ -105,21 +116,10 @@ export const TaskPage = () => {
                 <MDEditor.Markdown source={task?.content} />
               )}
             </TextareaWrapper>
+            <NavigationLinkWrapper>
+              <NavigationLink label="<<" path="/tasks" />
+            </NavigationLinkWrapper>
           </TaskContentWrapper>
-        }
-        extraHeaderContent={
-          <>
-            <Button color="#000" background="#ffff76" onClick={toggleEditMode}>
-              {editMode
-                ? descriptions[language].taskPageUpdateButtonText
-                : descriptions[language].taskPageEditButtonText}
-            </Button>
-            {editMode && (
-              <Button color="#fff" background="#dc143c" onClick={exitEditMode}>
-                {descriptions[language].taskPageCancelButtonText}
-              </Button>
-            )}
-          </>
         }
       />
     </main>
@@ -133,4 +133,8 @@ const TaskContentWrapper = styled.div`
 
 const TextareaWrapper = styled.div`
   padding-top: 24px;
+`;
+
+const NavigationLinkWrapper = styled.div`
+  margin-top: 48px;
 `;

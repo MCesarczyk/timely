@@ -1,12 +1,9 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { styled } from 'styled-components';
 
-import { modes } from '../features/periods/constants';
-import { tasksApiService } from '../features/tasks/tasksApiService';
-import { periodsApiService } from '../features/periods/periodsApiService';
-import { descriptions } from '../services/languages/descriptions';
-import { Language } from '../services/languages/types';
-import { LanguageContext } from './App';
+import { modes } from '../periods/constants';
+import { tasksApiService } from '../tasks/tasksApiService';
+import { periodsApiService } from '../periods/periodsApiService';
 import { useCurrentDate } from './useCurrentDate';
 import { Header } from '../components/Header';
 import { Section } from '../components/Section';
@@ -19,8 +16,6 @@ import { PlayIcon } from './PlayIcon';
 import { StopIcon } from './StopIcon';
 
 export const Timer = () => {
-  const { language } = useContext(LanguageContext);
-
   const { taskList: tasks } = tasksApiService.useGetTasks();
 
   const [taskId, setTaskId] = useState<number>(0);
@@ -68,16 +63,14 @@ export const Timer = () => {
 
   return (
     <main>
-      <Header title={descriptions[language].timerPageTitle} />
+      <Header title="Timer" />
       <Section
-        title={descriptions[language].timerSectionTitle}
+        title="Measure your task time"
         body={
           <CounterWrapper>
             <CounterInnerWrapper>
               <Select onChange={onTaskChange}>
-                <option value={0}>
-                  {descriptions[language].taskSelectPlaceholder} &hellip;
-                </option>
+                <option value={0}>Select task &hellip;</option>
                 {tasks
                   .filter(({ done }) => !done)
                   .map(({ id, title }) => (
@@ -85,11 +78,9 @@ export const Timer = () => {
                   ))}
               </Select>
               <Select onChange={onModeChange}>
-                <option value={0}>
-                  {descriptions[language].modeSelectPlaceholder} &hellip;
-                </option>
+                <option value={0}>Select type &hellip;</option>
                 {modes.map(({ id, label }) => (
-                  <option key={id}>{label[language as Language]}</option>
+                  <option key={id}>{label}</option>
                 ))}
               </Select>
             </CounterInnerWrapper>
@@ -111,10 +102,7 @@ export const Timer = () => {
         }
         extraHeaderContent={<Clock />}
       />
-      <Section
-        title={descriptions[language].timerHistorySectionTitle}
-        body={<History />}
-      />
+      <Section title="History" body={<History />} />
     </main>
   );
 };
