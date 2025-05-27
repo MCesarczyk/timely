@@ -1,9 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
 import { css, styled } from 'styled-components';
 
-import { Task } from 'features/tasks/types';
-import { tasksApiService } from 'features/tasks/tasksApiService';
-import { SEARCH_QUERY_PARAM_NAME } from '../../../services/constants';
+import { Task } from '~/tasks/types';
+import { tasksApiService } from '~/tasks/tasksApiService';
+import { SEARCH_QUERY_PARAM_NAME } from '../../common/constants';
 
 interface TasksListProps {
   hideDone: boolean;

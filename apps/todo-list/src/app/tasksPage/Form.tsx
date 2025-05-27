@@ -1,7 +1,7 @@
 import { FormEvent, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 
-import { tasksApiService } from 'features/tasks/tasksApiService';
+import { tasksApiService } from '~/tasks/tasksApiService';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 

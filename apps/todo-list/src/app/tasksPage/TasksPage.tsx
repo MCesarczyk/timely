@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
 
-import { COMPLETED_TASKS_HIDDEN_KEY } from 'features/tasks/constants';
+import { COMPLETED_TASKS_HIDDEN_KEY } from '~/tasks/constants';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
-import { localStorageService } from 'services/localStorageService';
+import { localStorageService } from '~/common/localStorageService';
 import { Form } from './Form';
 import { Search } from './Search';
 import { TasksList } from './TasksList';

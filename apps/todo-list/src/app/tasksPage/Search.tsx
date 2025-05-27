@@ -4,8 +4,8 @@ import { styled } from 'styled-components';
 import {
   useQueryParameter,
   useReplaceQueryParameter,
-} from 'services/queryParameters';
-import { SEARCH_QUERY_PARAM_NAME } from 'services/constants';
+} from '~/common/queryParameters';
+import { SEARCH_QUERY_PARAM_NAME } from 'common/constants';
 import { Input } from 'components/Input';
 
 export const Search = () => {

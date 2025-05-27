@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import { tasksApiService } from 'features/tasks/tasksApiService';
+import { tasksApiService } from '~/tasks/tasksApiService';
 
 interface FormButtonsProps {
   hideDone: boolean;

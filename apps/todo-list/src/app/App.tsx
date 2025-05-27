@@ -1,7 +1,7 @@
 import { Route, HashRouter, Routes, Navigate } from 'react-router-dom';
 
-import { TasksPage } from 'app/tasks/tasksPage/TasksPage';
-import { TaskPage } from 'app/tasks/TaskPage';
+import { TasksPage } from '~/app/tasksPage/TasksPage';
+import { TaskPage } from '~/app/TaskPage';
 
 export const App = () => {
   return (

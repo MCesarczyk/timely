@@ -5,10 +5,10 @@ import MDEditor from '@uiw/react-md-editor';
 import { useRequiredRouteParams } from 'common/hooks';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
-import { tasksApiService } from 'features/tasks/tasksApiService';
+import { tasksApiService } from '~/tasks/tasksApiService';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
-import { Task } from 'features/tasks/types';
+import { Task } from '~/tasks/types';
 import { NavigationLink } from 'components/NavigationLink';
 
 export const TaskPage = () => {
