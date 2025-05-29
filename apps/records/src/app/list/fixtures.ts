@@ -36,3 +36,48 @@ export const items = [
         "authorId": null
     }
 ];
+
+export const periods = [
+    {
+        "id": 6,
+        "startTime": "2025-05-27T22:06:58.580Z",
+        "endTime": "2025-05-27T22:07:07.829Z",
+        "type": "meeting",
+        "todoId": 1
+    },
+    {
+        "id": 5,
+        "startTime": "2025-05-25T22:36:03.829Z",
+        "endTime": "2025-05-25T22:36:08.111Z",
+        "type": "lunch break",
+        "todoId": 2
+    },
+    {
+        "id": 4,
+        "startTime": "2025-05-25T22:23:08.969Z",
+        "endTime": "2025-05-25T22:23:21.039Z",
+        "type": "meeting",
+        "todoId": 1
+    },
+    {
+        "id": 3,
+        "startTime": "2025-05-25T12:27:36.610Z",
+        "endTime": "2025-05-25T12:27:40.352Z",
+        "type": "side work",
+        "todoId": 4
+    },
+    {
+        "id": 1,
+        "startTime": "2025-05-25T12:27:07.057Z",
+        "endTime": "2025-05-25T12:27:15.070Z",
+        "type": "work",
+        "todoId": 3
+    },
+    {
+        "id": 2,
+        "startTime": "2021-01-01T13:00:00.000Z",
+        "endTime": "2021-01-01T13:30:00.000Z",
+        "type": "break",
+        "todoId": null
+    }
+];
