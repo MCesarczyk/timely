@@ -7,9 +7,10 @@ import { TodoService } from './todo/todo.service';
 import { PrismaService } from './prisma.service';
 import { PeriodController } from './period/period.controller';
 import { PeriodService } from './period/period.service';
+import { HealthModule } from './health/health.module';
 
 @Module({
-  imports: [],
+  imports: [HealthModule],
   controllers: [AppController, TodoController, PeriodController],
   providers: [AppService, TodoService, PrismaService, PeriodService],
 })
