@@ -23,6 +23,11 @@
     },
     "lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    },
+    "@angular-devkit/build-angular:application": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "namedInputs": {
@@ -52,6 +57,15 @@
         "linter": "eslint",
         "unitTestRunner": "jest"
       }
+    },
+    "@nx/angular:application": {
+      "e2eTestRunner": "none",
+      "linter": "eslint",
+      "style": "css",
+      "unitTestRunner": "jest"
+    },
+    "@nx/angular:component": {
+      "style": "css"
     }
   }
 }
