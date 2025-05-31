@@ -50,6 +50,11 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "buildTarget": "records:build",
+        "port": 4200,
+        "open": true
+      },
       "configurations": {
         "production": {
           "buildTarget": "records:build:production"

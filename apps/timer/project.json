@@ -25,7 +25,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "timer:build",
-        "port": 3100
+        "port": 3100,
+        "open": true
       },
       "configurations": {
         "development": {
