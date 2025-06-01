@@ -1,4 +1,32 @@
 services:
+  base:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    image: timely-base:latest
+
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    depends_on:
+      - base
+    image: timely-api:latest
+    ports:
+      - 4433:4000
+    env_file:
+      - apps/api/.env.production
+    environment:
+      - ENVIRONMENT=docker
+
+    healthcheck:
+      test: wget localhost:4433/api/v1/health -q -O - > /dev/null 2>&1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
   timely-db:
     restart: always
     image: postgres:13
