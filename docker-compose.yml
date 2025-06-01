@@ -1,12 +1,14 @@
 services:
   base:
+    container_name: timely-base
     build:
       context: .
       dockerfile: Dockerfile.base
     image: timely-base:latest
 
   api:
-    container_name: api
+    restart: always
+    container_name: timely-api
     build:
       context: .
       dockerfile: apps/api/Dockerfile
@@ -19,13 +21,14 @@ services:
       - apps/api/.env.production
     environment:
       - ENVIRONMENT=docker
-
     healthcheck:
-      test: wget localhost:4433/api/v1/health -q -O - > /dev/null 2>&1
+      test: ['CMD', 'curl', '-f', 'http://localhost:4000/api/health']
       interval: 10s
       timeout: 5s
       retries: 3
       start_period: 30s
+    expose:
+      - 4433
 
   timely-db:
     restart: always
@@ -49,14 +52,15 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
       - PGADMIN_LISTEN_PORT=${PGADMIN_LISTEN_PORT}
     ports:
-      - "8433:80"
+      - '8433:80'
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     depends_on:
       - timely-db
+    expose:
+      - 8433
 
 volumes:
   db-data:
   pgadmin-data:
     driver: local
-
