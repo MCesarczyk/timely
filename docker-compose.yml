@@ -44,6 +44,7 @@ services:
       - apps/todo-list/.env.production
     restart: always
     depends_on:
+      - base
       - api
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:8080']
@@ -68,6 +69,7 @@ services:
       - apps/timer/.env.production
     restart: always
     depends_on:
+      - base
       - api
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:8080']
@@ -92,6 +94,7 @@ services:
       - apps/records/.env
     restart: always
     depends_on:
+      - base
       - api
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:8080']
