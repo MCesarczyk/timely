@@ -1,4 +1,110 @@
 services:
+  base:
+    container_name: timely-base
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    image: timely-base:latest
+
+  api:
+    restart: always
+    container_name: timely-api
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    depends_on:
+      - base
+    image: timely-api:latest
+    ports:
+      - 4433:4000
+    env_file:
+      - apps/api/.env.production
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:4000/api/health']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    expose:
+      - 4433
+
+  todo-list:
+    container_name: timely-todo-list
+    build:
+      context: .
+      dockerfile: apps/todo-list/Dockerfile
+    image: timely-todo-list:latest
+    ports:
+      - 3433:8080
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - apps/todo-list/.env.production
+    restart: always
+    depends_on:
+      - base
+      - api
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    expose:
+      - 3433
+
+  timer:
+    container_name: timely-timer
+    build:
+      context: .
+      dockerfile: apps/timer/Dockerfile
+    image: timely-timer:latest
+    ports:
+      - 3443:8080
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - apps/timer/.env.production
+    restart: always
+    depends_on:
+      - base
+      - api
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    expose:
+      - 3443
+
+  records:
+    container_name: timely-records
+    build:
+      context: .
+      dockerfile: apps/records/Dockerfile
+    image: timely-records:latest
+    ports:
+      - 3453:8080
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - apps/records/.env
+    restart: always
+    depends_on:
+      - base
+      - api
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    expose:
+      - 3453
+
   timely-db:
     restart: always
     image: postgres:13
@@ -21,14 +127,15 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
       - PGADMIN_LISTEN_PORT=${PGADMIN_LISTEN_PORT}
     ports:
-      - "8433:80"
+      - '8433:80'
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     depends_on:
       - timely-db
+    expose:
+      - 8433
 
 volumes:
   db-data:
   pgadmin-data:
     driver: local
-

@@ -1,0 +1,11 @@
+FROM node:23.11.1-bullseye AS base
+
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml* ./
+COPY nx.json .
+COPY tsconfig.base.json .
+
+RUN npm install -g pnpm@10 && pnpm install --prod --frozen-lockfile
+
+COPY . .
