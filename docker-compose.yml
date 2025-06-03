@@ -54,6 +54,30 @@ services:
     expose:
       - 3433
 
+  timer:
+    container_name: timely-timer
+    build:
+      context: .
+      dockerfile: apps/timer/Dockerfile
+    image: timely-timer:latest
+    ports:
+      - 3443:8080
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - apps/timer/.env.production
+    restart: always
+    depends_on:
+      - api
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    expose:
+      - 3443
+
   timely-db:
     restart: always
     image: postgres:13
