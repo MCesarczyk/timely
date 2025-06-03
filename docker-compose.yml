@@ -78,6 +78,30 @@ services:
     expose:
       - 3443
 
+  records:
+    container_name: timely-records
+    build:
+      context: .
+      dockerfile: apps/records/Dockerfile
+    image: timely-records:latest
+    ports:
+      - 3453:8080
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - apps/records/.env
+    restart: always
+    depends_on:
+      - api
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    expose:
+      - 3453
+
   timely-db:
     restart: always
     image: postgres:13
