@@ -20,7 +20,7 @@ services:
     env_file:
       - apps/api/.env.production
     environment:
-      - ENVIRONMENT=docker
+      - NODE_ENV=production
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:4000/api/health']
       interval: 10s
@@ -29,6 +29,30 @@ services:
       start_period: 30s
     expose:
       - 4433
+
+  todo-list:
+    container_name: timely-todo-list
+    build:
+      context: .
+      dockerfile: apps/todo-list/Dockerfile
+    image: timely-todo-list:latest
+    ports:
+      - 3433:8080
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - apps/todo-list/.env.production
+    restart: always
+    depends_on:
+      - api
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    expose:
+      - 3433
 
   timely-db:
     restart: always
