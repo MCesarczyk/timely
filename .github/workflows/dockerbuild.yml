@@ -1,0 +1,52 @@
+name: Docker Builds
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - 'libs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Identify Affected Apps
+        id: affected
+        run: |
+          APPS=$(npx nx affected:apps --base=origin/main --head=HEAD --plain)
+          echo "affected_apps=$APPS" >> $GITHUB_OUTPUT
+
+      - name: Build and Push Images
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            user/app:${{ github.sha }}
+            user/app:latest
+          build-args: |
+            APPS=${{ steps.affected.outputs.affected_apps }}
