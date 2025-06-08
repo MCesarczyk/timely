@@ -2,11 +2,12 @@ FROM node:23.11.1-bullseye AS development
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml* ./
-COPY nx.json .
-COPY tsconfig.base.json .
+COPY package.json pnpm-lock.yaml* nx.json tsconfig.base.json ./
 
-RUN npm install -g pnpm@10 && pnpm install --frozen-lockfile
+COPY apps/ ./apps/
+COPY libs/ ./libs/
+
+RUN npm install -g pnpm@10 && RUN npm install -g nx@21.1.2 && pnpm install --frozen-lockfile
 
 RUN pnpm nx run records:build:production
 
