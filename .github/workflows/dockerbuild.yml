@@ -53,8 +53,8 @@ jobs:
       - name: Identify Affected Apps
         id: affected
         run: |
-          APPS=$(npx nx show projects --affected --target=docker-build --base=origin/main --select=projects)
-          echo "affected_apps=$APPS"
+          affected_apps=$(npx nx show projects --affected --type=app --base=origin/main --json | jq -r '.[]')
+          echo "::set-output name=apps::$affected_apps"
 
       - name: Build and push affected Docker images
         run: |
