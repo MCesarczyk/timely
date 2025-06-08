@@ -50,9 +50,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Identify Affected Apps
+        id: affected
+        run: |
+          APPS=$(npx nx affected:apps --base=origin/main --head=HEAD --plain)
+          echo "affected_apps=$APPS" >> $GITHUB_OUTPUT
+
       - name: Build and push affected Docker images
         run: |
-          if [ ${{ matrix.app }} in $affected ]; then
+          if [ ${{ matrix.app }} in ${{ steps.affected.outputs.affected_apps }} ]; then
             echo "Building and pushing Docker image for ${{ matrix.app }}"
             npx nx docker-build ${{ matrix.app }} --push
           else
