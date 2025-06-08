@@ -54,9 +54,9 @@ jobs:
         run: |
           echo "Checking for changes in the affected apps..."
           affected_apps=$(npx nx show projects --affected --type=app --base=origin/main)
-          if [[ " $affected_apps " == *" {{ matrix.app }} "* ]]; then
-            echo "Building and pushing Docker image for {{ matrix.app }}"
-            npx nx docker-build {{ matrix.app }} --push
+          if [[ " $affected_apps " == *" ${{ matrix.app }} "* ]]; then
+            echo "Building and pushing Docker image for ${{ matrix.app }}"
+            npx nx docker-build ${{ matrix.app }} --push
           else
-            echo "No changes detected for {{ matrix.app }}, skipping build."
+            echo "No changes detected for ${{ matrix.app }}, skipping build."
           fi
