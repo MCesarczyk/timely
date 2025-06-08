@@ -52,11 +52,12 @@ jobs:
 
       - name: Build and push affected Docker images
         run: |
-          if [ ${{ matrix.app }} in ${npx nx show projects --affected --type=app --base=origin/main} ]; then
-            echo "Building and pushing Docker image for ${{ matrix.app }}"
-            npx nx docker-build ${{ matrix.app }} --push
+          affected_apps=$(npx nx show projects --affected --type=app --base=origin/main)
+          if [[ " $affected_apps " == *" api "* ]]; then
+            echo "Building and pushing Docker image for api"
+            npx nx docker-build api --push
           else
-            echo "No changes detected for ${{ matrix.app }}, skipping build."
+            echo "No changes detected for api, skipping build."
           fi
 
       # npx nx docker-build ${{ matrix.app }}
