@@ -51,13 +51,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push affected Docker images
-        run: |
-          npx nx docker-build api --push
-
-        # affected_apps=$(npx nx show projects --affected --type=app --base=origin/main)
-        # if [[ " $affected_apps " == *" api "* ]]; then
-        #   echo "Building and pushing Docker image for api"
-        #   npx nx docker-build api --push
-        # else
-        #   echo "No changes detected for api, skipping build."
-        # fi
+          affected_apps=$(npx nx show projects --affected --type=app --base=origin/main)
+          if [[ " $affected_apps " == *" {{ matrix.app }} "* ]]; then
+          echo "Building and pushing Docker image for {{ matrix.app }}"
+          npx nx docker-build {{ matrix.app }} --push
+          else
+          echo "No changes detected for {{ matrix.app }}, skipping build."
+          fi
