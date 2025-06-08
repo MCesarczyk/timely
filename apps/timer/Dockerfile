@@ -1,10 +1,16 @@
-FROM timely-base AS development
+FROM node:23.11.1-bullseye AS development
+
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml* ./
+COPY nx.json .
+COPY tsconfig.base.json .
 
 ARG VITE_API_URL
 ENV VITE_API_URL=$VITE_API_URL
 
 WORKDIR /app
-RUN pnpm fetch --prod
+RUN npm install -g pnpm@10 && pnpm fetch --prod
 COPY . .
 RUN pnpm install --frozen-lockfile && pnpm nx build timer --prod
 

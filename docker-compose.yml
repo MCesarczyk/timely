@@ -1,19 +1,10 @@
 services:
-  base:
-    container_name: timely-base
-    build:
-      context: .
-      dockerfile: Dockerfile.base
-    image: timely-base:latest
-
   api:
     restart: always
     container_name: timely-api
     build:
       context: .
       dockerfile: apps/api/Dockerfile
-    depends_on:
-      - base
     image: timely-api:latest
     ports:
       - 4433:4000
@@ -44,7 +35,6 @@ services:
       - apps/todo-list/.env.production
     restart: always
     depends_on:
-      - base
       - api
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:8080']
@@ -69,7 +59,6 @@ services:
       - apps/timer/.env.production
     restart: always
     depends_on:
-      - base
       - api
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:8080']
@@ -94,7 +83,6 @@ services:
       - apps/records/.env
     restart: always
     depends_on:
-      - base
       - api
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:8080']

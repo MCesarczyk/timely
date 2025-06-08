@@ -1,4 +1,10 @@
-FROM timely-base AS builder
+FROM node:23.11.1-bullseye AS builder
+
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml* ./
+COPY nx.json .
+COPY tsconfig.base.json .
 
 ARG PORT
 ARG DATABASE_URL
@@ -8,7 +14,7 @@ ENV DATABASE_URL=${DATABASE_URL}
 ENV NODE_ENV=production
 
 WORKDIR /app
-RUN pnpm fetch --prod
+RUN npm install -g pnpm@10 && pnpm fetch --prod
 COPY --chown=node:node . .
 RUN pnpm install --frozen-lockfile && chown -R node:node /app
 

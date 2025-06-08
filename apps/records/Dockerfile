@@ -1,6 +1,12 @@
-FROM timely-base AS development
+FROM node:23.11.1-bullseye AS development
 
-RUN pnpm install --frozen-lockfile
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml* ./
+COPY nx.json .
+COPY tsconfig.base.json .
+
+RUN npm install -g pnpm@10 && pnpm install --frozen-lockfile
 
 RUN pnpm nx build records --prod
 

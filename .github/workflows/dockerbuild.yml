@@ -14,39 +14,46 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: ['api', 'todo-list', 'timer', 'records']
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.1
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 22
+          cache: 'pnpm'
 
-      - name: Docker Login
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Identify Affected Apps
-        id: affected
+      - name: Build and push affected Docker images
         run: |
-          APPS=$(npx nx affected:apps --base=origin/main --head=HEAD --plain)
-          echo "affected_apps=$APPS" >> $GITHUB_OUTPUT
-
-      - name: Build and Push Images
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            user/app:${{ github.sha }}
-            user/app:latest
-          build-args: |
-            APPS=${{ steps.affected.outputs.affected_apps }}
+          if [ ${{ matrix.app }} in $affected ]; then
+            echo "Building and pushing Docker image for ${{ matrix.app }}"
+            npx nx docker-build ${{ matrix.app }} --push
+          else
+            echo "No changes detected for ${{ matrix.app }}, skipping build."
+          fi
