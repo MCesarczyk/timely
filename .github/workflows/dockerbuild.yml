@@ -51,6 +51,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push affected Docker images
+        run: |
+          echo "Checking for changes in the affected apps..."
           affected_apps=$(npx nx show projects --affected --type=app --base=origin/main)
           if [[ " $affected_apps " == *" {{ matrix.app }} "* ]]; then
           echo "Building and pushing Docker image for {{ matrix.app }}"
