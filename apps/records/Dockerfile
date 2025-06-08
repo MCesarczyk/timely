@@ -7,7 +7,7 @@ COPY package.json pnpm-lock.yaml* nx.json tsconfig.base.json ./
 COPY apps/ ./apps/
 COPY libs/ ./libs/
 
-RUN npm install -g pnpm@10 && RUN npm install -g nx@21.1.2 && pnpm install --frozen-lockfile
+RUN npm install -g pnpm@10 && npm install -g nx@21.1.2 && pnpm install --frozen-lockfile
 
 RUN pnpm nx run records:build:production
 
