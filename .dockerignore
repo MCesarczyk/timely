@@ -6,3 +6,6 @@ README.md
 dist
 .git
 .gitignore
+
+!apps/**/environments/environment.ts
+!apps/**/environments/environment.prod.ts

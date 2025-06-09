@@ -3,7 +3,7 @@ FROM node:23.11.1-bullseye AS development
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml* nx.json tsconfig.base.json ./
-COPY apps/records/src/environments/environment.prod.ts ./apps/records/src/environments
+COPY apps/ ./apps
 
 RUN npm install -g pnpm@10 && pnpm install --frozen-lockfile
 
