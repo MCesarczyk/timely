@@ -44,5 +44,5 @@ Thumbs.db
 .secrets*
 
 .angular
-**/environment.ts
 **/environment.*.ts
+**/env.js
