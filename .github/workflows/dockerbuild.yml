@@ -12,6 +12,9 @@ permissions:
   contents: read
   packages: write
 
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
