@@ -52,7 +52,7 @@ jobs:
 
       - name: Build and push affected Docker images
         run: |
-          npx nx docker-build ${{ matrix.app }} --push
+          npx nx docker-build ${{ matrix.app }} --push --no-cache
 
         # echo "Checking for changes in the affected apps..."
         # affected_apps=$(npx nx show projects --affected --type=app --base=origin/main)

@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY package.json pnpm-lock.yaml* nx.json tsconfig.base.json ./
 COPY apps/ ./apps
+COPY apps/records/src/environments/ ./apps/records/src/environments/
 
 RUN npm install -g pnpm@10 && pnpm install --frozen-lockfile
 
