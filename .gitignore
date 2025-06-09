@@ -41,7 +41,8 @@ testem.log
 .DS_Store
 Thumbs.db
 .env*
+.secrets*
 
 .angular
-**/environment.ts
 **/environment.*.ts
+**/env.js

@@ -8,12 +8,16 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/records",
         "index": "apps/records/src/index.html",
         "browser": "apps/records/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/records/tsconfig.app.json",
         "assets": [
           {
@@ -21,7 +25,9 @@
             "input": "apps/records/public"
           }
         ],
-        "styles": ["apps/records/src/styles.css"],
+        "styles": [
+          "apps/records/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -38,13 +44,7 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all",
-          "fileReplacements": [
-            {
-              "replace": "apps/records/src/environments/environment.ts",
-              "with": "apps/records/src/environments/environment.prod.ts"
-            }
-          ]
+          "outputHashing": "all"
         },
         "development": {
           "optimization": false,
@@ -82,7 +82,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/records/jest.config.ts"
       }
@@ -93,6 +95,17 @@
         "buildTarget": "records:build",
         "staticFilePath": "dist/apps/records/browser",
         "spa": true
+      }
+    },
+    "docker-build": {
+      "executor": "@nx-tools/nx-container:build",
+      "options": {
+        "context": ".",
+        "file": "apps/records/Dockerfile",
+        "tags": [
+          "mcesarczyk/timely-records:latest",
+          "ghcr.io/mcesarczyk/timely-records:latest"
+        ]
       }
     }
   }

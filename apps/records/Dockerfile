@@ -1,6 +1,12 @@
-FROM timely-base AS development
+FROM node:23.11.1-bullseye AS development
 
-RUN pnpm install --frozen-lockfile
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml* nx.json tsconfig.base.json ./
+COPY apps/ ./apps
+COPY apps/records/src/environments/ ./apps/records/src/environments/
+
+RUN npm install -g pnpm@10 && pnpm install --frozen-lockfile
 
 RUN pnpm nx build records --prod
 
@@ -12,8 +18,8 @@ ARG API_URL
 ENV API_URL=$API_URL
 
 RUN mkdir -p /etc/nginx/conf.d /var/cache/nginx /run && \
-chown -R 1000:1000 /etc/nginx/conf.d /var/cache/nginx /run && \
-chmod 775 /etc/nginx/conf.d /var/cache/nginx /run
+  chown -R 1000:1000 /etc/nginx/conf.d /var/cache/nginx /run && \
+  chmod 775 /etc/nginx/conf.d /var/cache/nginx /run
 
 USER 1000:1000
 
@@ -23,4 +29,4 @@ COPY --chown=1000:1000 apps/records/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 8080
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/bin/sh",  "-c",  "envsubst < /usr/share/nginx/html/assets/env.template.js > /usr/share/nginx/html/assets/env.js && exec nginx -g 'daemon off;'"]
